@@ -1,0 +1,9 @@
+{
+    "name": "Roulette-Front",
+    "description": "Roulette Front",
+    "version": "1.0",
+    "manifest_version": 3,
+    "action": {
+      "default_popup": "home.html"
+    }
+}
