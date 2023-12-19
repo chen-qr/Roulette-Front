@@ -1,4 +1,5 @@
 window.userWalletAddress = null;
+let rouletteGame = null;
 
 window.onload = async (event) => {
     if (window.ethereum) {
@@ -18,6 +19,7 @@ const showLoginStatus = async () => {
     } else {
         document.querySelector(".walletLogin").innerHTML = "钱包已连接";
         document.querySelector(".walletAddress").innerHTML = window.userWalletAddress;
+        createContract();
         showPlayerBalance();
     }
 }
@@ -53,9 +55,12 @@ const loginWithEth = async () => {
     }
 };
 
-const showPlayerBalance = async () => {
+const createContract = async () => {
     let address = "0x0a53852a22054533B24958096d3D3B6bEA3b6Cb8";
-    let rouletteGame = new window.web3.eth.Contract(abi, address, {from: window.userWalletAddress});
+    rouletteGame = new window.web3.eth.Contract(abi, address, {from: window.userWalletAddress});
+}
+
+const showPlayerBalance = async () => {
     // await rouletteGame.methods.getInitAmount(window.userWalletAddress).send();
     let playBalance = await rouletteGame.methods.balanceOf(window.userWalletAddress).call();
     console.log(playBalance);
