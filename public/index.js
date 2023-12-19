@@ -56,11 +56,10 @@ const loginWithEth = async () => {
 const showPlayerBalance = async () => {
     let address = "0x0a53852a22054533B24958096d3D3B6bEA3b6Cb8";
     let rouletteGame = new window.web3.eth.Contract(abi, address, {from: window.userWalletAddress});
-    await rouletteGame.methods.getInitAmount(window.userWalletAddress).send();
+    // await rouletteGame.methods.getInitAmount(window.userWalletAddress).send();
     let playBalance = await rouletteGame.methods.balanceOf(window.userWalletAddress).call();
     console.log(playBalance);
-    let prizePoolBalance = await rouletteGame.methods.prizePoolBalance().call();
-    console.log(prizePoolBalance);
+    document.querySelector(".playAmount").innerHTML = playBalance;
 };
 
 let abi = [
