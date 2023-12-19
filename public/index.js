@@ -55,8 +55,6 @@ const loginWithEth = async () => {
 
 const showPlayerBalance = async () => {
     let address = "0x0a53852a22054533B24958096d3D3B6bEA3b6Cb8";
-    // const contractJson = fs.readFileSync('RouletteGame.json');
-    // const abi = contract.abi;
     let rouletteGame = new window.web3.eth.Contract(abi, address);
     let playBalance = await rouletteGame.methods.balanceOf(window.userWalletAddress).call();
     console.log(playBalance);
