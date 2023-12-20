@@ -61,7 +61,6 @@ const createContract = async () => {
 }
 
 const showPlayerBalance = async () => {
-    // await rouletteGame.methods.getInitAmount(window.userWalletAddress).send();
     let playBalance = await rouletteGame.methods.balanceOf(window.userWalletAddress).call();
     console.log(playBalance);
     document.querySelector(".playAmount").innerHTML = playBalance;
@@ -73,7 +72,6 @@ const drawingSubmit = async () => {
     console.log(`   number    : ${randomNumber}`);
     console.log(`   commitment: ${commitment}`);
     const flipFee = await rouletteGame.methods.getFlipFee().call();
-    // const flipFee = 600000000000;
     console.log(`   fee       : ${flipFee} wei`);
 
     const receipt = await rouletteGame.methods
@@ -99,6 +97,16 @@ const drawingSubmit = async () => {
 };
 
 document.querySelector(".betAction").addEventListener("click", drawingSubmit);
+
+const applyForAmount = async () => {
+    await rouletteGame.methods
+        .getInitAmount(window.userWalletAddress)
+        .send({from: window.userWalletAddress});
+    
+    showPlayerBalance();
+}
+
+document.querySelector(".applyForAmount").addEventListener("click", applyForAmount);
 
 let abi = [
     {
