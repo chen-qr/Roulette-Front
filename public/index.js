@@ -1,6 +1,6 @@
 window.userWalletAddress = null;
 let rouletteGame = null;
-const contractAddress = "0x9a6CdcDc003C9f4d65D25359daF9A42Ea4d1Cc67";
+const contractAddress = "0xe55ABe9F574f309820D5F9Bd47f9285e58D6feE9";
 
 window.onload = async (event) => {
     if (window.ethereum) {
@@ -122,6 +122,42 @@ let abi = [
       "type": "constructor"
     },
     {
+      "inputs": [],
+      "name": "IncorrectSender",
+      "type": "error"
+    },
+    {
+      "inputs": [],
+      "name": "InsufficientFee",
+      "type": "error"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "internalType": "uint64",
+          "name": "sequenceNumber",
+          "type": "uint64"
+        }
+      ],
+      "name": "FlipRequest",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "internalType": "bool",
+          "name": "isHeads",
+          "type": "bool"
+        }
+      ],
+      "name": "FlipResult",
+      "type": "event"
+    },
+    {
       "inputs": [
         {
           "internalType": "address",
@@ -134,6 +170,19 @@ let abi = [
         {
           "internalType": "uint256",
           "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "getFlipFee",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "fee",
           "type": "uint256"
         }
       ],
@@ -292,6 +341,42 @@ let abi = [
         }
       ],
       "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "bytes32",
+          "name": "userCommitment",
+          "type": "bytes32"
+        }
+      ],
+      "name": "requestFlip",
+      "outputs": [],
+      "stateMutability": "payable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint64",
+          "name": "sequenceNumber",
+          "type": "uint64"
+        },
+        {
+          "internalType": "bytes32",
+          "name": "userRandom",
+          "type": "bytes32"
+        },
+        {
+          "internalType": "bytes32",
+          "name": "providerRandom",
+          "type": "bytes32"
+        }
+      ],
+      "name": "revealFlip",
+      "outputs": [],
+      "stateMutability": "nonpayable",
       "type": "function"
     }
   ];
