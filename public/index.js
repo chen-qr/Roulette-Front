@@ -1,6 +1,6 @@
 window.userWalletAddress = null;
 let rouletteGame = null;
-const contractAddress = "0x641e06Edb3a25128cD9fa6A276f2a98cB20Ac8A4";
+const contractAddress = "0xd3411cF0113f897735EE19B510453Fb12E4f473C";
 
 window.onload = async (event) => {
     if (window.ethereum) {
@@ -79,7 +79,9 @@ const drawingSubmit = async () => {
         .requestFlip(commitment)
         .send({ value: flipFee, from: window.userWalletAddress });
     
+    console.log(`   tx        : ${receipt.transactionHash}`);
     const sequenceNumber = receipt.events.FlipRequest.returnValues.sequenceNumber;
+    console.log(`   sequence  : ${sequenceNumber}`);
 
     const fortunaUrl = "https://fortuna-staging.pyth.network";
     const chainName = "lightlink-pegasus";
