@@ -1,6 +1,6 @@
 window.userWalletAddress = null;
 let rouletteGame = null;
-const contractAddress = "0xd3411cF0113f897735EE19B510453Fb12E4f473C";
+const contractAddress = "0x66D64faDd9E62eC8d3328CD279422808332364E4";
 
 window.onload = async (event) => {
     if (window.ethereum) {
@@ -73,6 +73,7 @@ const drawingSubmit = async () => {
     console.log(`   number    : ${randomNumber}`);
     console.log(`   commitment: ${commitment}`);
     const flipFee = await rouletteGame.methods.getFlipFee().call();
+    // const flipFee = 600000000000;
     console.log(`   fee       : ${flipFee} wei`);
 
     const receipt = await rouletteGame.methods
@@ -99,7 +100,7 @@ const drawingSubmit = async () => {
 
 document.querySelector(".betAction").addEventListener("click", drawingSubmit);
 
-const fetchWithRetry = async () => {
+const fetchWithRetry = async (url, maxRetries) => {
     let retryCount = 0;
 
     async function doRequest() {
