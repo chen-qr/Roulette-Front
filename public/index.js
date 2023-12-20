@@ -1,5 +1,6 @@
 window.userWalletAddress = null;
 let rouletteGame = null;
+const contractAddress = "0x9a6CdcDc003C9f4d65D25359daF9A42Ea4d1Cc67";
 
 window.onload = async (event) => {
     if (window.ethereum) {
@@ -56,8 +57,7 @@ const loginWithEth = async () => {
 };
 
 const createContract = async () => {
-    let address = "0x0a53852a22054533B24958096d3D3B6bEA3b6Cb8";
-    rouletteGame = new window.web3.eth.Contract(abi, address, {from: window.userWalletAddress});
+    rouletteGame = new window.web3.eth.Contract(abi, contractAddress, {from: window.userWalletAddress});
 }
 
 const showPlayerBalance = async () => {
@@ -66,6 +66,54 @@ const showPlayerBalance = async () => {
     console.log(playBalance);
     document.querySelector(".playAmount").innerHTML = playBalance;
 };
+
+const drawingSubmit = async () => {
+    const randomNumber = web3.utils.randomHex(32);
+    const commitment = web3.utils.keccak256(randomNumber);
+    const flipFee = await rouletteGame.methods.getFlipFee().call();
+
+    const receipt = await rouletteGame.methods
+        .requestFlip(commitment)
+        .send({ value: flipFee, from: window.userWalletAddress });
+    
+    const sequenceNumber = receipt.events.FlipRequest.returnValues.sequenceNumber;
+
+    const fortunaUrl = "https://fortuna-staging.pyth.network";
+    const chainName = "lightlink-pegasus";
+    const url = `${fortunaUrl}/v1/chains/${chainName}/revelations/${sequenceNumber}`;
+    const response = await fetchWithRetry(url, 3);
+    const providerRandom = `0x${response.value.data}`;
+
+    const receipt2 = await rouletteGame.methods
+        .revealFlip(sequenceNumber, randomNumber, providerRandom)
+        .send({ from: window.userWalletAddress });
+
+    const isHeads = receipt2.events.FlipResult.returnValues.isHeads;
+    console.log(`   result    : ${isHeads ? "heads" : "tails"}`);
+};
+
+document.querySelector(".betAction").addEventListener("click", drawingSubmit);
+
+const fetchWithRetry = async () => {
+    let retryCount = 0;
+
+    async function doRequest() {
+        try {
+        const response = await axios.get(url);
+        return response.data;
+        } catch (error) {
+        if (retryCount < maxRetries) {
+            retryCount++;
+            setTimeout(doRequest, 1000);
+        } else {
+            console.error("Max retry attempts reached. Exiting.");
+            throw error;
+        }
+        }
+    }
+
+    return await doRequest(); // Start the initial request
+}
 
 let abi = [
     {
