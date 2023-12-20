@@ -1,0 +1,4 @@
+.address-show {
+    display: flex;
+    flex-direction: row;
+}
