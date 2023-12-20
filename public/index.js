@@ -1,6 +1,6 @@
 window.userWalletAddress = null;
 let rouletteGame = null;
-const contractAddress = "0x66D64faDd9E62eC8d3328CD279422808332364E4";
+const contractAddress = "0xcf01dBEB362710A077A1fe9D5540Cc8BE903e491";
 
 window.onload = async (event) => {
     if (window.ethereum) {
@@ -94,8 +94,8 @@ const drawingSubmit = async () => {
         .revealFlip(sequenceNumber, randomNumber, providerRandom)
         .send({ from: window.userWalletAddress });
 
-    const isHeads = receipt2.events.FlipResult.returnValues.isHeads;
-    console.log(`   result    : ${isHeads ? "heads" : "tails"}`);
+    const drawingNumber = receipt2.events.FlipResult.returnValues.drawingNumber;
+    console.log(`   drawingNumber    : ${drawingNumber}`);
 };
 
 document.querySelector(".betAction").addEventListener("click", drawingSubmit);
@@ -134,9 +134,9 @@ let abi = [
       "inputs": [
         {
           "indexed": false,
-          "internalType": "bool",
-          "name": "isHeads",
-          "type": "bool"
+          "internalType": "uint64",
+          "name": "drawingNumber",
+          "type": "uint64"
         }
       ],
       "name": "FlipResult",
