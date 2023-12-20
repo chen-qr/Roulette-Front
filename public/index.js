@@ -18,7 +18,7 @@ const showLoginStatus = async () => {
         document.querySelector(".walletLogin").innerHTML = "钱包未连接，请连接钱包";
         document.querySelector(".walletLogin").addEventListener("click", loginWithEth);
     } else {
-        document.querySelector(".walletLogin").innerHTML = "钱包已连接";
+        document.querySelector(".walletLogin").innerHTML = "Wallet connected!";
         document.querySelector(".walletAddress").innerHTML = window.userWalletAddress;
         createContract();
         showPlayerBalance();
