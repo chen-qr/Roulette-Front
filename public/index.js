@@ -87,11 +87,7 @@ const drawingSubmit = async () => {
     const fortunaUrl = "https://fortuna-staging.pyth.network";
     const chainName = "lightlink_pegasus";
     const url = `${fortunaUrl}/v1/chains/${chainName}/revelations/${sequenceNumber}`;
-    console.log(url);
     const response = await axios.get(url);
-    console.log(response);
-    // const response = await fetchWithRetry(url, 3);
-    // const providerRandom = `0x${response.value.data}`;
     const providerRandom = `0x${response.data.value.data}`;
 
     const receipt2 = await rouletteGame.methods
@@ -103,29 +99,6 @@ const drawingSubmit = async () => {
 };
 
 document.querySelector(".betAction").addEventListener("click", drawingSubmit);
-
-const fetchWithRetry = async (url, maxRetries) => {
-    let retryCount = 0;
-
-    async function doRequest() {
-        try {
-            
-            const response = await axios.get(url);
-            console.log(response);
-            return response.data;
-        } catch (error) {
-            if (retryCount < maxRetries) {
-                retryCount++;
-                setTimeout(doRequest, 1000);
-            } else {
-                console.error("Max retry attempts reached. Exiting.");    
-                throw error;
-            }
-        }
-    }
-
-    return await doRequest(); // Start the initial request
-}
 
 let abi = [
     {
