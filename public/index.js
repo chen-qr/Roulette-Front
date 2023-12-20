@@ -1,6 +1,7 @@
 window.userWalletAddress = null;
 let rouletteGame = null;
 const contractAddress = "0xcf01dBEB362710A077A1fe9D5540Cc8BE903e491";
+let playBalance = 0;
 
 window.onload = async (event) => {
     if (window.ethereum) {
@@ -61,12 +62,25 @@ const createContract = async () => {
 }
 
 const showPlayerBalance = async () => {
-    let playBalance = await rouletteGame.methods.balanceOf(window.userWalletAddress).call();
+    playBalance = await rouletteGame.methods.balanceOf(window.userWalletAddress).call();
     console.log(playBalance);
     document.querySelector(".playAmount").innerHTML = playBalance;
 };
 
 const drawingSubmit = async () => {
+    const betNumber = document.querySelector(".betNumber").value;
+    const betAmount = document.querySelector(".betAmount").value;
+
+    if (betNumber <= 0 || betNumber > 12) {
+        alert("Bet number must between 1 and 12!");
+        return;
+    }
+
+    if (betAmount <= 0 || betAmount > playBalance) {
+        alert("Bet amount must be greater than zero and smaller than player balance!");
+        return;
+    }
+
     const randomNumber = web3.utils.randomHex(32);
     const commitment = web3.utils.keccak256(randomNumber);
     console.log(`   number    : ${randomNumber}`);
