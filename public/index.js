@@ -1,6 +1,6 @@
 window.userWalletAddress = null;
 let rouletteGame = null;
-const contractAddress = "0xe55ABe9F574f309820D5F9Bd47f9285e58D6feE9";
+const contractAddress = "0x641e06Edb3a25128cD9fa6A276f2a98cB20Ac8A4";
 
 window.onload = async (event) => {
     if (window.ethereum) {
@@ -70,7 +70,10 @@ const showPlayerBalance = async () => {
 const drawingSubmit = async () => {
     const randomNumber = web3.utils.randomHex(32);
     const commitment = web3.utils.keccak256(randomNumber);
+    console.log(`   number    : ${randomNumber}`);
+    console.log(`   commitment: ${commitment}`);
     const flipFee = await rouletteGame.methods.getFlipFee().call();
+    console.log(`   fee       : ${flipFee} wei`);
 
     const receipt = await rouletteGame.methods
         .requestFlip(commitment)
