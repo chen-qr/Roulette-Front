@@ -1,4 +1,5 @@
-window.abi = [
+window.abi = 
+[
     {
       "inputs": [],
       "stateMutability": "nonpayable",
