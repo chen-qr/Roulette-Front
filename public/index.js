@@ -68,6 +68,7 @@ const showPlayerBalance = async () => {
 };
 
 const drawingSubmit = async () => {
+    let betInfo = {};
     const betNumber = document.querySelector(".betNumber").value;
     const betAmount = document.querySelector(".betAmount").value;
 
@@ -75,7 +76,6 @@ const drawingSubmit = async () => {
         alert("Bet number must between 1 and 12!");
         return;
     }
-
     if (betAmount <= 0 || betAmount > playBalance) {
         alert("Bet amount must be greater than zero and smaller than player balance!");
         return;
@@ -108,6 +108,14 @@ const drawingSubmit = async () => {
 
     const drawingNumber = receipt2.events.FlipResult.returnValues.drawingNumber;
     console.log(`   drawingNumber    : ${drawingNumber}`);
+
+    betInfo["betNumber"] = betNumber;
+    betInfo["randomNumber"] = randomNumber;
+    betInfo["commitment"] = commitment;
+    betInfo["flipFee"] = flipFee;
+    betInfo["sequenceNumber"] = sequenceNumber;
+    betInfo["drawingNumber"] = drawingNumber;
+    document.querySelector(".betInfo").innerHTML = JSON.stringify(betInfo);
 };
 
 document.querySelector(".betAction").addEventListener("click", drawingSubmit);
