@@ -62,7 +62,7 @@ const createContract = async () => {
 }
 
 const showPlayerBalance = async () => {
-    playBalance = await rouletteGame.methods.getScore({from: window.userWalletAddress}).call();
+    playBalance = await rouletteGame.methods.getScore().call();
     console.log(playBalance);
     document.querySelector(".playAmount").innerHTML = playBalance;
 };
