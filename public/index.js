@@ -129,3 +129,15 @@ const applyForAmount = async () => {
 }
 
 document.querySelector(".applyForAmount").addEventListener("click", applyForAmount);
+
+const deposit = async () => {
+    const amount = document.querySelector(".depositAmount").value;
+
+    await rouletteGame.methods
+        .deposit()
+        .send({from: window.userWalletAddress, value: amount});
+    
+    showPlayerBalance();
+};
+
+document.querySelector(".deposit").addEventListener("click", deposit);
