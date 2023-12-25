@@ -120,16 +120,6 @@ const drawingSubmit = async () => {
 
 document.querySelector(".betAction").addEventListener("click", drawingSubmit);
 
-const applyForAmount = async () => {
-    await rouletteGame.methods
-        .getInitAmount(window.userWalletAddress)
-        .send({from: window.userWalletAddress});
-    
-    showPlayerBalance();
-}
-
-document.querySelector(".applyForAmount").addEventListener("click", applyForAmount);
-
 const deposit = async () => {
     const amount = document.querySelector(".depositAmount").value;
 
