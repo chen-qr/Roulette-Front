@@ -193,13 +193,7 @@ const betAction = async () => {
     const providerRandom = `0x${response.data.value.data}`;
     console.log(`   provider  : ${providerRandom}`);
 
-    betInfo.betNumber = betNumber;
-    betInfo.betAmount = betAmount;
-    betInfo.randomNumber = randomNumber;
-    betInfo.commitment = commitment;
-    betInfo.sequenceNumber = sequenceNumber;
-    betInfo.providerRandom = providerRandom;
-    document.querySelector(".betInfo").innerHTML = JSON.stringify(betInfo);
+    document.querySelector(".betShow").innerHTML = `You have bet (number: ${betNumber}, amount: ${betAmount})`;
 };  
 
 document.querySelector(".betAction").addEventListener("click", betAction);
