@@ -1,6 +1,6 @@
 window.userWalletAddress = null;
 let rouletteGame = null;
-const contractAddress = "0x39d444Ae17Bfe80524c459FD1714224A30F4f618";
+const contractAddress = "0x6b7dbfa03B623594C8eeeeD554E6EAFCe53cf133";
 let playBalance = 0;
 
 window.onload = async (event) => {
@@ -118,7 +118,7 @@ const drawingSubmit = async () => {
     document.querySelector(".betInfo").innerHTML = JSON.stringify(betInfo);
 };
 
-document.querySelector(".betAction").addEventListener("click", drawingSubmit);
+// document.querySelector(".betAction").addEventListener("click", drawingSubmit);
 
 const deposit = async () => {
     const amount = document.querySelector(".depositAmount").value;
@@ -155,3 +155,51 @@ const withdraw = async () => {
 };
 
 document.querySelector(".withdraw").addEventListener("click", withdraw);
+
+const betAction = async () => {
+    let betInfo = {};
+    const betNumber = document.querySelector(".betNumber").value;
+    const betAmount = document.querySelector(".betAmount").value;
+
+    if (betNumber <= 0 || betNumber > 12) {
+        alert("Bet number must between 1 and 12!");
+        return;
+    }
+    if (betAmount <= 0 || betAmount > playBalance) {
+        alert("Bet amount must be greater than zero and smaller than player balance!");
+        return;
+    }
+
+    const randomNumber = web3.utils.randomHex(32);
+    const commitment = web3.utils.keccak256(randomNumber);
+
+    console.log(`   number    : ${randomNumber}`);
+    console.log(`   commitment: ${commitment}`);
+
+    const flipFee = await rouletteGame.methods.getFlipFee().call();
+    console.log(`   fee       : ${flipFee} wei`);
+
+    const receipt = await rouletteGame.methods
+        .makeBet(window.userWalletAddress, betAmount, betNumber, commitment)
+        .send({ value: flipFee, from: window.userWalletAddress });
+
+    const sequenceNumber = receipt.events.BetRequest.returnValues.sequenceNumber;
+    console.log(`   sequence  : ${sequenceNumber}`);
+
+    const fortunaUrl = "https://fortuna-staging.pyth.network";
+    const chainName = "lightlink_pegasus";
+    const url = `${fortunaUrl}/v1/chains/${chainName}/revelations/${sequenceNumber}`;
+    const response = await axios.get(url);
+    const providerRandom = `0x${response.data.value.data}`;
+    console.log(`   provider  : ${providerRandom}`);
+
+    betInfo.betNumber = betNumber;
+    betInfo.betAmount = betAmount;
+    betInfo.randomNumber = randomNumber;
+    betInfo.commitment = commitment;
+    betInfo.sequenceNumber = sequenceNumber;
+    betInfo.providerRandom = providerRandom;
+    document.querySelector(".betInfo").innerHTML = JSON.stringify(betInfo);
+};  
+
+document.querySelector(".betAction").addEventListener("click", betAction);
