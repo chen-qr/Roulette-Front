@@ -122,8 +122,8 @@ document.querySelector(".betAction").addEventListener("click", drawingSubmit);
 
 const deposit = async () => {
     const amount = document.querySelector(".depositAmount").value;
-    if (amount === "" || amount <= 0) {
-        const errMsg = "deposit amount can not less than zero!";
+    if (amount === "" || amount < 100000000) {
+        const errMsg = "deposit amount can not less than 100000000!";
         alert(errMsg);
         console.warn(errMsg);
         return;
