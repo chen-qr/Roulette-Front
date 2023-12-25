@@ -48,8 +48,6 @@ const loginWithEth = async () => {
         // store the user's wallet address in local storage
         window.localStorage.setItem("userWalletAddress", selectedAccount);
 
-        // show the user dashboard
-        showUserDashboard();
         } catch (error) {
         alert(error);
         }
@@ -72,6 +70,26 @@ const showPlayerStatus = async () => {
         document.querySelector(".betShow").innerHTML = `You have bet (number: ${betInfo.betNumber}, amount: ${betInfo.betAmount})`;
     } else {
         document.querySelector(".betShow").innerHTML = `You haven't bet yet!`;
+    }
+    // 展示结果
+    const betResults = JSON.parse(localStorage.getItem('betResults'));
+    if (betResults != undefined && betResults != null && betResults.length > 0) {
+        let showArr = [];
+        for (let i = 0; i < betResults.length; i++) {
+            let result = betResults[i]
+            let show = 
+            `<tr>
+                <td>${result.drawingTime}</td>
+                <td>${result.betNumber}</td>
+                <td>${result.betAmount}</td>
+                <td>${result.betResult}</td>
+            </tr>
+            `
+            showArr.push(show);
+        }
+        document.querySelector(".betResults").innerHTML = showArr.join("");
+    } else {
+        document.querySelector(".betResults").innerHTML = "";
     }
 };
 
@@ -173,6 +191,31 @@ const drawingAction = async () => {
     console.log(`   randomNumber  : ${randomNumber}`);
     console.log(`   drawNumber  : ${drawNumber}`);
     console.log(`   isWin  : ${isWin}`);
+    
+    const currentTime = new Date();
+    const year = currentTime.getFullYear();
+    const month = String(currentTime.getMonth() + 1).padStart(2, '0'); // 月份从0开始，所以要加1
+    const day = String(currentTime.getDate()).padStart(2, '0');
+    const hours = String(currentTime.getHours()).padStart(2, '0');
+    const minutes = String(currentTime.getMinutes()).padStart(2, '0');
+    const seconds = String(currentTime.getSeconds()).padStart(2, '0');
+
+    const formattedTime = `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
+    const result = {
+        drawingTime: formattedTime,
+        betNumber: betInfo.betNumber,
+        betAmount: betInfo.betAmount,
+        betResult: isWin ? "win" : "lose",
+    };
+
+    let betResults = JSON.parse(localStorage.getItem('betResults'));
+    if (betResults == undefined || !Array.isArray(betResults) || betResults.length <= 0) {
+        betResults= new Array(result);
+    } else {
+        betResults.push(result);
+    }
+    localStorage.setItem('betResults', JSON.stringify(betResults));
+
     showPlayerStatus();
 };
 document.querySelector(".drawingAction").addEventListener("click", drawingAction);
