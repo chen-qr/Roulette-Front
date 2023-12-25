@@ -68,7 +68,11 @@ const showPlayerStatus = async () => {
     document.querySelector(".playAmount").innerHTML = playBalance;
 
     betInfo = await rouletteGame.methods.getBetInfo().call();
-    console.log(betInfo);
+    if (betInfo.betNumber == 0 || betInfo.betAmount == 0) {
+        document.querySelector(".betShow").innerHTML = `You haven't bet yet!`;
+    } else {
+        document.querySelector(".betShow").innerHTML = `You have bet (number: ${betInfo.betNumber}, amount: ${betInfo.betAmount})`;
+    }
 };
 
 const deposit = async () => {
@@ -144,7 +148,7 @@ const betAction = async () => {
     const providerRandom = `0x${response.data.value.data}`;
     console.log(`   provider  : ${providerRandom}`);
 
-    document.querySelector(".betShow").innerHTML = `You have bet (number: ${betNumber}, amount: ${betAmount})`;
+    
     showPlayerStatus();
 };  
 
