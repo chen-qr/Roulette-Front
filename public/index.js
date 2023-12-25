@@ -1,6 +1,6 @@
 window.userWalletAddress = null;
 let rouletteGame = null;
-const contractAddress = "0xA6C2b8dF5E633F93787BAF4C214E056c3646eAeF";
+const contractAddress = "0xbe2c47f3DBD464240775AC5e5ae17c8386c2203c";
 let playBalance = 0;
 let betInfo = {};
 
@@ -68,10 +68,10 @@ const showPlayerStatus = async () => {
     document.querySelector(".playAmount").innerHTML = playBalance;
 
     betInfo = await rouletteGame.methods.getBetInfo().call();
-    if (betInfo.betNumber == 0 || betInfo.betAmount == 0) {
-        document.querySelector(".betShow").innerHTML = `You haven't bet yet!`;
-    } else {
+    if (betInfo.betNumber > 0 && betInfo.betAmount > 0 && localStorage.sequenceNumber == betInfo.sequenceNumber && localStorage.userRandomNumber > 0) {
         document.querySelector(".betShow").innerHTML = `You have bet (number: ${betInfo.betNumber}, amount: ${betInfo.betAmount})`;
+    } else {
+        document.querySelector(".betShow").innerHTML = `You haven't bet yet!`;
     }
 };
 
@@ -112,7 +112,6 @@ const withdraw = async () => {
 document.querySelector(".withdraw").addEventListener("click", withdraw);
 
 const betAction = async () => {
-    let betInfo = {};
     const betNumber = document.querySelector(".betNumber").value;
     const betAmount = document.querySelector(".betAmount").value;
 
@@ -140,28 +139,40 @@ const betAction = async () => {
 
     const sequenceNumber = receipt.events.BetRequest.returnValues.sequenceNumber;
     console.log(`   sequence  : ${sequenceNumber}`);
-
-    const fortunaUrl = "https://fortuna-staging.pyth.network";
-    const chainName = "lightlink_pegasus";
-    const url = `${fortunaUrl}/v1/chains/${chainName}/revelations/${sequenceNumber}`;
-    const response = await axios.get(url);
-    const providerRandom = `0x${response.data.value.data}`;
-    console.log(`   provider  : ${providerRandom}`);
-
     
+    localStorage.userRandomNumber = randomNumber;
+    localStorage.sequenceNumber = sequenceNumber;
     showPlayerStatus();
 };  
 
 document.querySelector(".betAction").addEventListener("click", betAction);
 
 const drawingAction = async () => {
+    if (betInfo.betNumber == 0 || betInfo.betAmount == 0 || betInfo.sequenceNumber == 0) {
+        alert("You haven't bet yet! Please make a bet!");
+        return;
+    }
+
+    const fortunaUrl = "https://fortuna-staging.pyth.network";
+    const chainName = "lightlink_pegasus";
+    const url = `${fortunaUrl}/v1/chains/${chainName}/revelations/${betInfo.sequenceNumber}`;
+    const response = await axios.get(url);
+    const providerRandom = `0x${response.data.value.data}`;
+    console.log(`   provider  : ${providerRandom}`);
+
     const receipt = await rouletteGame.methods
-        .drawing(window.userWalletAddress, window.betInfo.sequenceNumber, 
-            window.betInfo.randomNumber, window.betInfo.providerRandom)
+        .drawing(window.userWalletAddress, 
+            localStorage.sequenceNumber, 
+            localStorage.userRandomNumber, 
+            providerRandom)
         .send({ from: window.userWalletAddress });
 
     const randomNumber = receipt.events.DrawingRequest.returnValues.randomNumber;
     const drawNumber = receipt.events.DrawingRequest.returnValues.drawNumber;
+    const isWin = receipt.events.DrawingRequest.returnValues.isWin;
+    console.log(`   randomNumber  : ${randomNumber}`);
     console.log(`   drawNumber  : ${drawNumber}`);
+    console.log(`   isWin  : ${isWin}`);
+    showPlayerStatus();
 };
 document.querySelector(".drawingAction").addEventListener("click", drawingAction);

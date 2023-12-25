@@ -153,6 +153,12 @@ window.abi =
         "internalType": "uint256",
         "name": "drawNumber",
         "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "internalType": "bool",
+        "name": "isWin",
+        "type": "bool"
       }
     ],
     "name": "DrawingRequest",
