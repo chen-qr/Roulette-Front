@@ -140,12 +140,18 @@ document.querySelector(".deposit").addEventListener("click", deposit);
 
 const withdraw = async () => {
     const amount = document.querySelector(".withdrawAmount").value;
-    if (amount === "" || amount < 100000000) {
+    if (amount === "" || amount <= 0) {
         const errMsg = "withdraw amount can not less than 0!";
         alert(errMsg);
         console.warn(errMsg);
         return;
     };
+
+    await rouletteGame.methods
+        .withdraw(window.userWalletAddress, amount)
+        .send({from: window.userWalletAddress});
+    
+    showPlayerBalance();
 };
 
 document.querySelector(".withdraw").addEventListener("click", withdraw);
