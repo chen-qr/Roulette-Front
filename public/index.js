@@ -122,6 +122,12 @@ document.querySelector(".betAction").addEventListener("click", drawingSubmit);
 
 const deposit = async () => {
     const amount = document.querySelector(".depositAmount").value;
+    if (amount === "" || amount <= 0) {
+        const errMsg = "deposit amount can not less than zero!";
+        alert(errMsg);
+        console.warn(errMsg);
+        return;
+    }
 
     await rouletteGame.methods
         .deposit()
