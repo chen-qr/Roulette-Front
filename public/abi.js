@@ -300,6 +300,29 @@ window.abi =
   },
   {
     "inputs": [],
+    "name": "getBetInfo",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "betAmount",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "betNumber",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint64",
+        "name": "sequenceNumber",
+        "type": "uint64"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
     "name": "getFlipFee",
     "outputs": [
       {
@@ -389,11 +412,6 @@ window.abi =
         "internalType": "uint256",
         "name": "betNumber",
         "type": "uint256"
-      },
-      {
-        "internalType": "bytes32",
-        "name": "userCommitment",
-        "type": "bytes32"
       },
       {
         "internalType": "uint64",

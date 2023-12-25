@@ -1,7 +1,8 @@
 window.userWalletAddress = null;
 let rouletteGame = null;
-const contractAddress = "0x6b7dbfa03B623594C8eeeeD554E6EAFCe53cf133";
+const contractAddress = "0xA6C2b8dF5E633F93787BAF4C214E056c3646eAeF";
 let playBalance = 0;
+let betInfo = {};
 
 window.onload = async (event) => {
     if (window.ethereum) {
@@ -22,7 +23,7 @@ const showLoginStatus = async () => {
         document.querySelector(".walletLogin").innerHTML = "Wallet connected!";
         document.querySelector(".walletAddress").innerHTML = window.userWalletAddress;
         createContract();
-        showPlayerBalance();
+        showPlayerStatus();
     }
 }
 
@@ -61,64 +62,14 @@ const createContract = async () => {
     rouletteGame = new window.web3.eth.Contract(window.abi, contractAddress, {from: window.userWalletAddress});
 }
 
-const showPlayerBalance = async () => {
+const showPlayerStatus = async () => {
     playBalance = await rouletteGame.methods.getScore().call();
     console.log(playBalance);
     document.querySelector(".playAmount").innerHTML = playBalance;
+
+    betInfo = await rouletteGame.methods.getBetInfo().call();
+    console.log(betInfo);
 };
-
-const drawingSubmit = async () => {
-    let betInfo = {};
-    const betNumber = document.querySelector(".betNumber").value;
-    const betAmount = document.querySelector(".betAmount").value;
-
-    if (betNumber <= 0 || betNumber > 12) {
-        alert("Bet number must between 1 and 12!");
-        return;
-    }
-    if (betAmount <= 0 || betAmount > playBalance) {
-        alert("Bet amount must be greater than zero and smaller than player balance!");
-        return;
-    }
-
-    const randomNumber = web3.utils.randomHex(32);
-    const commitment = web3.utils.keccak256(randomNumber);
-    console.log(`   number    : ${randomNumber}`);
-    console.log(`   commitment: ${commitment}`);
-    const flipFee = await rouletteGame.methods.getFlipFee().call();
-    console.log(`   fee       : ${flipFee} wei`);
-
-    const receipt = await rouletteGame.methods
-        .requestFlip(commitment)
-        .send({ value: flipFee, from: window.userWalletAddress });
-    
-    console.log(`   tx        : ${receipt.transactionHash}`);
-    const sequenceNumber = receipt.events.FlipRequest.returnValues.sequenceNumber;
-    console.log(`   sequence  : ${sequenceNumber}`);
-
-    const fortunaUrl = "https://fortuna-staging.pyth.network";
-    const chainName = "lightlink_pegasus";
-    const url = `${fortunaUrl}/v1/chains/${chainName}/revelations/${sequenceNumber}`;
-    const response = await axios.get(url);
-    const providerRandom = `0x${response.data.value.data}`;
-
-    const receipt2 = await rouletteGame.methods
-        .revealFlip(sequenceNumber, randomNumber, providerRandom)
-        .send({ from: window.userWalletAddress });
-
-    const drawingNumber = receipt2.events.FlipResult.returnValues.drawingNumber;
-    console.log(`   drawingNumber    : ${drawingNumber}`);
-
-    betInfo["betNumber"] = betNumber;
-    betInfo["randomNumber"] = randomNumber;
-    betInfo["commitment"] = commitment;
-    betInfo["flipFee"] = flipFee;
-    betInfo["sequenceNumber"] = sequenceNumber;
-    betInfo["drawingNumber"] = drawingNumber;
-    document.querySelector(".betInfo").innerHTML = JSON.stringify(betInfo);
-};
-
-// document.querySelector(".betAction").addEventListener("click", drawingSubmit);
 
 const deposit = async () => {
     const amount = document.querySelector(".depositAmount").value;
@@ -133,7 +84,7 @@ const deposit = async () => {
         .deposit()
         .send({from: window.userWalletAddress, value: amount});
     
-    showPlayerBalance();
+    showPlayerStatus();
 };
 
 document.querySelector(".deposit").addEventListener("click", deposit);
@@ -151,7 +102,7 @@ const withdraw = async () => {
         .withdraw(window.userWalletAddress, amount)
         .send({from: window.userWalletAddress});
     
-    showPlayerBalance();
+    showPlayerStatus();
 };
 
 document.querySelector(".withdraw").addEventListener("click", withdraw);
@@ -194,6 +145,19 @@ const betAction = async () => {
     console.log(`   provider  : ${providerRandom}`);
 
     document.querySelector(".betShow").innerHTML = `You have bet (number: ${betNumber}, amount: ${betAmount})`;
+    showPlayerStatus();
 };  
 
 document.querySelector(".betAction").addEventListener("click", betAction);
+
+const drawingAction = async () => {
+    const receipt = await rouletteGame.methods
+        .drawing(window.userWalletAddress, window.betInfo.sequenceNumber, 
+            window.betInfo.randomNumber, window.betInfo.providerRandom)
+        .send({ from: window.userWalletAddress });
+
+    const randomNumber = receipt.events.DrawingRequest.returnValues.randomNumber;
+    const drawNumber = receipt.events.DrawingRequest.returnValues.drawNumber;
+    console.log(`   drawNumber  : ${drawNumber}`);
+};
+document.querySelector(".drawingAction").addEventListener("click", drawingAction);
