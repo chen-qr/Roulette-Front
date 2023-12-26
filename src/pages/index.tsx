@@ -7,7 +7,6 @@ function index({}) {
     const [walletAddress, setWalletAddress] = useState("")
 
     useEffect(() => {
-
         async function name() {
             if (window.web3) {
                 try {
