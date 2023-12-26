@@ -47,14 +47,4 @@ function index({}) {
     );
 }
 
-export async function getStaticProps() {
-    return {
-        props: {
-            wallet: {
-                address: "1234",
-            }
-        }
-    }
-}
-
 export default index
