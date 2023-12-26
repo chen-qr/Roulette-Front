@@ -1,23 +1,20 @@
 import styles from '../styles/index.module.css'
 import Web3 from 'web3'
 import { Wallet } from './interface'
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 
 function index({}) {
-    const [count, setCount] = useState(0)
-    function increment() {
-        setCount(count + 1)
-    }
+    const [walletAddress, setWalletAddress] = useState("")
+
+    useEffect(() => {
+        setWalletAddress(window.localStorage.getItem("userWalletAddress"))
+    })
 
     return (
     <div>
         <div>
             <div>连接钱包</div>
-            <div>Address:</div>
-        </div>
-        <div>
-            <p>You clicked {count} times</p>
-            <button onClick={increment}>Click me</button>
+            <div>Address: {walletAddress}</div>
         </div>
     </div>
     );
