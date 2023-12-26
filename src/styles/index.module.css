@@ -1,0 +1,14 @@
+.address-show {
+    display: flex;
+    flex-direction: row;
+}
+
+.bet-board {
+    display: flex;
+    flex-direction: row;
+}
+
+.blance-board {
+    display: flex;
+    flex-direction: row;
+}
