@@ -7,9 +7,7 @@ import {initWalletAddress} from '../lib/wallet'
 function index({}) {
     const [walletAddress, setWalletAddress] = useState("")
 
-    useEffect(() => {
-        initWalletAddress(setWalletAddress)
-    })
+    useEffect(() => { initWalletAddress(setWalletAddress) })
 
     return (
     <div>
