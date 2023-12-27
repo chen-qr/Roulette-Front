@@ -18,7 +18,6 @@ export async function initPlayerScore(walletAddress: string, setPlayerScore: Fun
 }
 
 export async function deposit(walletAddress: string, amount: number) {
-    const rouletteGame = getContract(walletAddress);
 
     console.log("deposit", walletAddress, amount);
     if (amount < 100000000) {
