@@ -1,11 +1,9 @@
 import Head from 'next/head'
 import Script from 'next/script'
 import styles from '../styles/index.module.css'
-import Web3 from 'web3'
-import { Wallet } from './interface'
 import React, { useState, useEffect } from 'react'
 import {initWalletAddress} from '../lib/Wallet'
-import {initPlayerScore} from '../lib/RouletteGame/client'
+import {initPlayerScore, deposit} from '../lib/RouletteGame/client'
 
 function index({}) {
     const [walletAddress, setWalletAddress] = useState("")
@@ -15,6 +13,9 @@ function index({}) {
     useEffect(() => { 
         if (walletAddress != undefined && walletAddress != "") { initPlayerScore(walletAddress, setPlayerScore) }
     }, [walletAddress])
+    const handleDepositClick = () =>{
+        deposit(walletAddress, 1000000000)
+    };
 
     return (
     <div>
@@ -31,7 +32,7 @@ function index({}) {
         <hr />
         <div>
             <input type="number"/>
-            <button type="button">deposit</button>
+            <button type="button" onClick={handleDepositClick}>deposit</button>
         </div>
         <div>
             <input type="number"/>
