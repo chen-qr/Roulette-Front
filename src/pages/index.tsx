@@ -11,10 +11,10 @@ function index({}) {
     const [walletAddress, setWalletAddress] = useState("")
     useEffect(() => { initWalletAddress(setWalletAddress) })
 
-    const [playerScore, setPlayerScore] = useState("")
+    const [playerScore, setPlayerScore] = useState(0)
     useEffect(() => { 
         if (walletAddress != undefined && walletAddress != "") { initPlayerScore(walletAddress, setPlayerScore) }
-    })
+    }, [walletAddress])
 
     return (
     <div>

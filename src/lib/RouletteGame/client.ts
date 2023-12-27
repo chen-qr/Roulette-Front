@@ -14,7 +14,6 @@ export async function initPlayerScore(walletAddress: string, setPlayerScore: Fun
   }  
 
   const score = await rouletteGame.methods.getScore().call();
-  console.log("score: ", score)
-  setPlayerScore(score)
+  setPlayerScore(parseInt(score))
 }
 
