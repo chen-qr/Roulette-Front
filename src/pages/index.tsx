@@ -28,6 +28,34 @@ function index({}) {
         <div>
             <div>Player Score: {playerScore}</div>
         </div>
+        <hr />
+        <div>
+            <input type="number"/>
+            <button type="button">deposit</button>
+        </div>
+        <div>
+            <input type="number"/>
+            <button type="button">withdraw</button>
+        </div>
+        <hr />
+        <div>
+            <div>
+                <div>Bet Number</div>
+                <input type="number"/>
+            </div>
+            <div>
+                <div>Bet Amount</div>
+                <input type="number"/>
+            </div>
+        </div>
+        <div>
+            <button type="button">Bet</button>
+            <div></div>
+        </div>
+        <div>
+            <button type="button">Drawing</button>
+        </div>
+        <hr />
     </div>
     );
 }
