@@ -19,9 +19,9 @@ function index({}) {
 
     return (
     <div>
-        {/* <Head>
-            <Script src="/web3.js" />
-        </Head> */}
+        <Head>
+            <Script src="https://cdn.jsdelivr.net/gh/ethereum/web3.js/dist/web3.min.js" />
+        </Head>
         <div>
             <div>连接钱包</div>
             <div>Address: {walletAddress}</div>
