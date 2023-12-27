@@ -4,12 +4,8 @@ import Web3 from "web3";
 let rouletteGame = null;
 
 async function createContract(walletAddress: string) {
-    // const web3 = new Web3(window.ethereum);
-    // rouletteGame = new web3.eth.Contract(abi, contractAddress, {from: walletAddress});
-    if (window.ethereum) {
-        window.web3 = new Web3(window.ethereum);
-    }
-    rouletteGame = new window.web3.eth.Contract(abi, contractAddress, {from: walletAddress});
+    const web3 = new Web3(window.ethereum);
+    rouletteGame = new web3.eth.Contract(abi, contractAddress, {from: walletAddress});
 }
 
 export async function initPlayerScore(walletAddress: string, setPlayerScore: Function) {

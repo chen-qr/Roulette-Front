@@ -19,9 +19,9 @@ function index({}) {
 
     return (
     <div>
-        <Head>
+        {/* <Head>
             <Script src="/web3.js" />
-        </Head>
+        </Head> */}
         <div>
             <div>连接钱包</div>
             <div>Address: {walletAddress}</div>
