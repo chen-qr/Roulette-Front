@@ -29,5 +29,5 @@ export async function deposit(walletAddress: string, amount: number) {
 
     await rouletteGame.methods
         .deposit()
-        .send({from: walletAddress, value: amount});
+        .send({from: walletAddress, value: amount.toString});
 };
