@@ -4,6 +4,7 @@ import BetNumberArea from '../BetNumberArea/Layout'
 
 const BetArea = ({beginNum, endNum, lineCnt, onNumberClick}) => {
     const [selectNumber, setSelectNumber] = useState(0)
+    const [isSelectBetNumber, setIsSelectBetNumber] = useState(false)
 
     if ((endNum - beginNum + 1) % lineCnt !== 0){
         throw new Error('endNum - beginNum + 1 must be a multiple of lineCnt');
@@ -12,10 +13,9 @@ const BetArea = ({beginNum, endNum, lineCnt, onNumberClick}) => {
     const colNums = Array.from({length: colCnt - beginNum + 1}, (_, i) => i + beginNum);
     const lineNums = Array.from({length: lineCnt}, (_, i) => i + beginNum);
 
-    let isSelectBetNumber = false;
     const handleOnNumberClick = (number) => {
         onNumberClick(number)
-        isSelectBetNumber = true;
+        setIsSelectBetNumber(true)
         setSelectNumber(number)
     }
 
@@ -44,8 +44,8 @@ const BetArea = ({beginNum, endNum, lineCnt, onNumberClick}) => {
 
     return (
         <div>
-            <div className={styles.selectNumberShow}>
-                {isSelectBetNumber? "1. Please chose your bet number!" : `1. You have chose the number ${selectNumber} to bet!`}
+            <div className={`${styles.selectNumberShow} ${isSelectBetNumber ? styles.selectNumberShowActive : styles.selectNumberShowInActive}`}>
+                {isSelectBetNumber ? `1. You have chose the number ${selectNumber} to bet!` : "1. Please chose your bet number!"}
             </div>
             {renderRows()}
             <div className={styles.setBetAmountShow}>2. Please set your bet amount!</div>

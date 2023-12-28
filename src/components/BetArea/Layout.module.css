@@ -3,6 +3,13 @@
     font-weight: bold;
     font-size: 1rem;
 }
+.selectNumberShowActive {
+    color: green;
+}
+.selectNumberShowInActive {
+    color: red;
+}
+
 
 .colLayout {
     display: flex;
