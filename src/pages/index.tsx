@@ -3,7 +3,7 @@ import Script from 'next/script'
 import styles from '../styles/index.module.css'
 import React, { useState, useEffect } from 'react'
 import {initWalletAddress} from '../lib/Wallet'
-import {initPlayerScore, deposit, withdraw} from '../lib/RouletteGame/client'
+import {initPlayerScore, deposit, withdraw, betAction} from '../lib/RouletteGame/client'
 
 function index({}) {
     const [walletAddress, setWalletAddress] = useState("")
@@ -30,16 +30,17 @@ function index({}) {
 
     // deposit click
     const handleDepositClick = () =>{
-        console.log("deposit click", depositAmount)
         deposit(walletAddress, depositAmount)
         onPlayerScoreChange()
     };
-
     // withdraw click
     const handleWithdrawClick = () =>{
-        console.log("withdraw click", withdrawAmount)
         withdraw(walletAddress, withdrawAmount, playerScore)
         onPlayerScoreChange()
+    };
+    // bet click
+    const handleBetClick = () =>{
+        betAction(walletAddress, betNumber, betAmount, playerScore)
     };
 
     return (
@@ -75,7 +76,7 @@ function index({}) {
             </div>
         </div>
         <div>
-            <button type="button">Bet</button>
+            <button type="button" onClick={handleBetClick}>Bet</button>
             <div></div>
         </div>
         <div>

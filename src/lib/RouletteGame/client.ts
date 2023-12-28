@@ -2,11 +2,12 @@ import {contractAddress, abi} from './config'
 import Web3 from "web3";
 
 let rouletteGame = null;
+let web3: Web3 = null;
 
 function getContract(walletAddress: string) {
     if (rouletteGame == undefined || rouletteGame == null) {
         console.log("Initializing contract");
-        const web3 = new Web3(window.ethereum);
+        web3 = new Web3(window.ethereum);
         rouletteGame = new web3.eth.Contract(abi, contractAddress, {from: walletAddress});
     }
     return rouletteGame;
@@ -49,4 +50,35 @@ export async function withdraw(walletAddress: string, amount: number, playerScor
     await rouletteGame.methods
         .withdraw(walletAddress, amount)
         .send({from: walletAddress});
+};
+
+export async function betAction(walletAddress: string, betNumber: number, betAmount: number, playerScore: number) {
+
+    if (betNumber <= 0 || betNumber > 12) {
+        alert("Bet number must between 1 and 12!");
+        return;
+    }
+    if (betAmount <= 0 || betAmount > playerScore) {
+        alert("Bet amount must be greater than zero and smaller than player balance!");
+        return;
+    }
+
+    const randomNumber = web3.utils.randomHex(32);
+    const commitment = web3.utils.keccak256(randomNumber);
+
+    console.log(`   number    : ${randomNumber}`);
+    console.log(`   commitment: ${commitment}`);
+
+    const flipFee = await rouletteGame.methods.getFlipFee().call();
+    console.log(`   fee       : ${flipFee} wei`);
+
+    const receipt = await rouletteGame.methods
+        .makeBet(walletAddress, betAmount, betNumber, commitment)
+        .send({ value: flipFee, from: walletAddress });
+
+    const sequenceNumber = receipt.events.BetRequest.returnValues.sequenceNumber;
+    console.log(`   sequence  : ${sequenceNumber}`);
+    
+    localStorage.userRandomNumber = randomNumber;
+    localStorage.sequenceNumber = sequenceNumber;
 };
