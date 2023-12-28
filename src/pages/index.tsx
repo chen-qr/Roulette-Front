@@ -4,15 +4,11 @@ import React, { useState, useEffect } from 'react'
 import {initWalletAddress} from '../lib/Wallet'
 import {initPlayerScore, deposit, withdraw, betAction, drawingAction} from '../lib/RouletteGame/client'
 import BetArea from '../components/BetArea/Layout'
+import WalletConnect from '../components/WalletConnect/Layout'
 
 function index({}) {
     const [walletAddress, setWalletAddress] = useState("")
     useEffect(() => { initWalletAddress(setWalletAddress) })
-
-    const [logSuggest, setLogSuggest] = useState("Please connect your wallet!")
-    useEffect(() => { 
-        if (walletAddress != undefined && walletAddress != "") { setLogSuggest("Wallet connected") }
-    }, [walletAddress])
 
     const [playerScore, setPlayerScore] = useState(0)
     useEffect(() => { 
@@ -60,10 +56,9 @@ function index({}) {
         <Head>
             <Script src="https://cdn.jsdelivr.net/gh/ethereum/web3.js/dist/web3.min.js" />
         </Head>
-        <div>
-            <div>{logSuggest}</div>
-            <div>Address: {walletAddress}</div>
-        </div>
+        
+        <WalletConnect walletAddress={walletAddress}/>
+
         <hr />
         <div>
             <div>Player Score: {playerScore}</div>
