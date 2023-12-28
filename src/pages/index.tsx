@@ -17,6 +17,9 @@ function index({}) {
     // deposit amount
     const [depositAmount, setDepositAmount] = useState(0)
     const handleDepositAmountChange = (event) => { setDepositAmount(event.target.value) }   
+    // withdraw amount
+    const [withdrawAmount, setWithdrawAmount] = useState(0)
+    const handleWithdrawAmountChange = (event) => { setWithdrawAmount(event.target.value) }   
 
     // deposit click
     const handleDepositClick = () =>{
@@ -24,9 +27,7 @@ function index({}) {
         deposit(walletAddress, depositAmount)
     };
 
-    // withdraw amount
-    const [withdrawAmount, setWithdrawAmount] = useState(0)
-    const handleWithdrawAmountChange = (event) => { setWithdrawAmount(event.target.value) }   
+    
 
     return (
     <div>
