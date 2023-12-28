@@ -13,8 +13,13 @@ function index({}) {
     useEffect(() => { 
         if (walletAddress != undefined && walletAddress != "") { initPlayerScore(walletAddress, setPlayerScore) }
     }, [walletAddress])
+
+    const [depositAmount, setDepositAmount] = useState(0)
+    const handleDepositAmountChange = (event) => { setDepositAmount(event.target.value) }   
+
     const handleDepositClick = () =>{
-        deposit(walletAddress, 1000000000)
+        console.log("deposit click", depositAmount)
+        deposit(walletAddress, depositAmount)
     };
 
     return (
@@ -31,7 +36,7 @@ function index({}) {
         </div>
         <hr />
         <div>
-            <input type="number"/>
+            <input type="number" value={depositAmount} onChange={handleDepositAmountChange}/>
             <button type="button" onClick={handleDepositClick}>deposit</button>
         </div>
         <div>
