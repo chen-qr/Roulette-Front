@@ -28,7 +28,6 @@ function index({}) {
     const handleWithdrawAmountChange = (event) => { setWithdrawAmount(event.target.value) }   
     // bet number
     const [betNumber, setBetNumber] = useState(0)
-    const handleBetNumberChange = (event) => { setBetNumber(event.target.value) }
     // bet amount
     const [betAmount, setBetAmount] = useState(0)
     const handleBetAmountChange = (event) => { setBetAmount(event.target.value) }
@@ -53,7 +52,7 @@ function index({}) {
     };
 
     const onNumberClick = (number) => {
-        alert(`you have click ${number}`)
+        setBetNumber(number)
     }
 
     return (
@@ -79,10 +78,11 @@ function index({}) {
         </div>
         <hr />
         <div>
-            <div>
-                <div>Bet Number</div>
-                <input type="number" value={betNumber} onChange={handleBetNumberChange}/>
-            </div>
+            <div>Please chose your bet number!</div>
+            <BetArea beginNum={1} endNum={36} lineCnt={3} onNumberClick={onNumberClick}/>
+            <div>You have chose the number {betNumber} to bet!</div>
+        </div>
+        <div>
             <div>
                 <div>Bet Amount</div>
                 <input type="number" value={betAmount} onChange={handleBetAmountChange}/>
@@ -96,10 +96,6 @@ function index({}) {
             <button type="button" onClick={handleDrawingClick}>Drawing</button>
         </div>
         <hr />
-        <div>
-            <div>Please chose your bet number!</div>
-            <BetArea beginNum={1} endNum={36} lineCnt={3} onNumberClick={onNumberClick}/>
-        </div>
     </div>
     );
 }
