@@ -1,14 +1,28 @@
 .betNumberAreaBlack {
+    position: relative;
     width: 50px;
     height: 50px;
     background-color: black;
-}
 
-.betText {
-    width: 100%;
-    height: 100%;
-    color: white;
+    /* 子元素居中展示 */
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+.betText {
+    width: 50%;
+    height: 50%;
+    color: white;
+
+    /* 子元素居中展示 */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    /* 画圆边 */
+    border-color: white;
+    border-width: 2px;
+    border-style: solid;
+    border-radius: 5px;
 }
