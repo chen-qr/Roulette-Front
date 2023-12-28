@@ -1,6 +1,6 @@
 import Head from 'next/head'
 import Script from 'next/script'
-import styles from '../styles/index.module.css'
+import styles from './styles.module.css'
 import React, { useState, useEffect } from 'react'
 import {initWalletAddress} from '../lib/Wallet'
 import {initPlayerScore, deposit, withdraw, betAction, drawingAction} from '../lib/RouletteGame/client'
@@ -92,6 +92,15 @@ function index({}) {
             <button type="button" onClick={handleDrawingClick}>Drawing</button>
         </div>
         <hr />
+        <div>
+            <div>
+                <div className={styles.betNumberAreaBlack}>
+                    <div className={styles.betText}>
+                        1
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
     );
 }
