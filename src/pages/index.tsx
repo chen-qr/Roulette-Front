@@ -1,9 +1,9 @@
 import Head from 'next/head'
 import Script from 'next/script'
-import styles from './styles.module.css'
 import React, { useState, useEffect } from 'react'
 import {initWalletAddress} from '../lib/Wallet'
 import {initPlayerScore, deposit, withdraw, betAction, drawingAction} from '../lib/RouletteGame/client'
+import BetNumberArea from '../components/BetNumberArea/Layout'
 
 function index({}) {
     const [walletAddress, setWalletAddress] = useState("")
@@ -52,6 +52,8 @@ function index({}) {
         drawingAction(walletAddress)
     };
 
+    const items = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+
     return (
     <div>
         <Head>
@@ -94,18 +96,7 @@ function index({}) {
         <hr />
         <div>
             <div>
-                <div className={`${styles.betNumberArea} ${styles.araeRed}`}>
-                    <div className={styles.betText}>
-                        1
-                    </div>
-                </div>
-            </div>
-            <div>
-                <div className={styles.betNumberArea}>
-                    <div className={styles.betText}>
-                        2
-                    </div>
-                </div>
+                <BetNumberArea />
             </div>
         </div>
     </div>
