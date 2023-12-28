@@ -1,8 +1,10 @@
+import { useState } from 'react'
 import styles from './Layout.module.css'
-
 import BetNumberArea from '../BetNumberArea/Layout'
 
 const BetArea = ({beginNum, endNum, lineCnt, onNumberClick}) => {
+    const [selectNumberShow, setSelectNumberShow] = useState("Please chose your bet number!")
+
     if ((endNum - beginNum + 1) % lineCnt !== 0){
         throw new Error('endNum - beginNum + 1 must be a multiple of lineCnt');
     }
@@ -10,13 +12,18 @@ const BetArea = ({beginNum, endNum, lineCnt, onNumberClick}) => {
     const colNums = Array.from({length: colCnt - beginNum + 1}, (_, i) => i + beginNum);
     const lineNums = Array.from({length: lineCnt}, (_, i) => i + beginNum);
 
+    const handleOnNumberClick = (number) => {
+        onNumberClick(number)
+        setSelectNumberShow(`You have chose the number ${number} to bet!`)
+    }
+
     // 渲染列元素
     const renderCols = (iLine: number) => {
         // 生成列元素
         const colItems = colNums.map((iCol) => {
             const number = iCol + (iLine - 1) * colCnt;
             const color = (number + iLine) % 2 === 0 ? "red" : "black"
-            return <BetNumberArea key={iCol}  color={color} number={number} onNumberClick={onNumberClick}/>;
+            return <BetNumberArea key={iCol}  color={color} number={number} onNumberClick={handleOnNumberClick}/>;
         });
         return (
             <div className={styles.colLayout}>{colItems}</div>
@@ -35,6 +42,7 @@ const BetArea = ({beginNum, endNum, lineCnt, onNumberClick}) => {
 
     return (
         <div>
+            <div className={styles.selectNumberShow}>{selectNumberShow}</div>
             {renderRows()}
         </div>
     );    

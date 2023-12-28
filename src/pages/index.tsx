@@ -69,9 +69,8 @@ function index({}) {
         </div>
         
         <div>
-            <div>Please chose your bet number!</div>
             <BetArea beginNum={1} endNum={36} lineCnt={3} onNumberClick={onNumberClick}/>
-            <div>You have chose the number {betNumber} to bet!</div>
+            
         </div>
         <div>
             <div>
