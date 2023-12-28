@@ -19,9 +19,7 @@ export async function initPlayerScore(walletAddress: string, setPlayerScore: Fun
 }
 
 export async function deposit(walletAddress: string, amount: number) {
-
-    console.log("deposit", walletAddress, amount);
-    if (amount < 100000000) {
+    if (amount <= 100000000) {
         const errMsg = "deposit amount can not less than 100000000!";
         alert(errMsg);
         console.warn(errMsg);
@@ -31,4 +29,24 @@ export async function deposit(walletAddress: string, amount: number) {
     await rouletteGame.methods
         .deposit()
         .send({from: walletAddress, value: amount});
+};
+
+export async function withdraw(walletAddress: string, amount: number, playerScore: number) {
+    if (amount <= 0) {
+        const errMsg = "withdraw amount can not less than 0!";
+        alert(errMsg);
+        console.warn(errMsg);
+        return;
+    };
+
+    if (amount > playerScore) {
+        const errMsg = `withdraw amount ${amount} can not larger than playerScore ${playerScore}!`;
+        alert(errMsg);
+        console.warn(errMsg);
+        return;
+    }
+
+    await rouletteGame.methods
+        .withdraw(walletAddress, amount)
+        .send({from: walletAddress});
 };

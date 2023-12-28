@@ -3,7 +3,7 @@ import Script from 'next/script'
 import styles from '../styles/index.module.css'
 import React, { useState, useEffect } from 'react'
 import {initWalletAddress} from '../lib/Wallet'
-import {initPlayerScore, deposit} from '../lib/RouletteGame/client'
+import {initPlayerScore, deposit, withdraw} from '../lib/RouletteGame/client'
 
 function index({}) {
     const [walletAddress, setWalletAddress] = useState("")
@@ -13,6 +13,7 @@ function index({}) {
     useEffect(() => { 
         if (walletAddress != undefined && walletAddress != "") { initPlayerScore(walletAddress, setPlayerScore) }
     }, [walletAddress])
+    const onPlayerScoreChange = () => { initPlayerScore(walletAddress, setPlayerScore) }
 
     // deposit amount
     const [depositAmount, setDepositAmount] = useState(0)
@@ -25,9 +26,15 @@ function index({}) {
     const handleDepositClick = () =>{
         console.log("deposit click", depositAmount)
         deposit(walletAddress, depositAmount)
+        onPlayerScoreChange()
     };
 
-    
+    // withdraw click
+    const handleWithdrawClick = () =>{
+        console.log("withdraw click", withdrawAmount)
+        withdraw(walletAddress, withdrawAmount, playerScore)
+        onPlayerScoreChange()
+    };
 
     return (
     <div>
@@ -48,7 +55,7 @@ function index({}) {
         </div>
         <div>
             <input type="number" value={withdrawAmount} onChange={handleWithdrawAmountChange}/>
-            <button type="button">withdraw</button>
+            <button type="button" onClick={handleWithdrawClick}>withdraw</button>
         </div>
         <hr />
         <div>
