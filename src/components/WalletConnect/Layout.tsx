@@ -12,7 +12,7 @@ const WalletConnect = ({walletAddress}) => {
     return (
         <div>
             <div>
-                <div>{logSuggest}</div>
+                <div className={styles.logSuggest}>{logSuggest}</div>
                 <div>Address: {walletAddress}</div>
             </div>
         </div>
