@@ -3,6 +3,7 @@ import styles from './Layout.module.css'
 import BetNumberArea from '../BetNumberArea/Layout'
 
 const BetArea = ({beginNum, endNum, lineCnt, onNumberClick}) => {
+    const [selectedNumber, setSelectedNumber] = useState(0)
     const [currentStep, setCurrentStep] = useState(1)
     const [betAmount, setBetAmount] = useState(0)
 
@@ -15,6 +16,7 @@ const BetArea = ({beginNum, endNum, lineCnt, onNumberClick}) => {
 
     const handleOnNumberClick = (number) => {
         onNumberClick(number)
+        setSelectedNumber(number)
         setCurrentStep(2)
     }
 
@@ -36,7 +38,7 @@ const BetArea = ({beginNum, endNum, lineCnt, onNumberClick}) => {
         const colItems = colNums.map((iCol) => {
             const number = iCol + (iLine - 1) * colCnt;
             const color = (number + iLine) % 2 === 0 ? "red" : "black"
-            return <BetNumberArea key={iCol}  color={color} number={number} onNumberClick={handleOnNumberClick}/>;
+            return <BetNumberArea key={iCol}  color={color} number={number} onNumberClick={handleOnNumberClick} currentNum={selectedNumber}/>;
         });
         return (
             <div className={styles.colLayout}>{colItems}</div>
