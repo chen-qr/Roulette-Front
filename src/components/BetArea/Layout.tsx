@@ -3,9 +3,8 @@ import styles from './Layout.module.css'
 import BetNumberArea from '../BetNumberArea/Layout'
 
 const BetArea = ({beginNum, endNum, lineCnt, onNumberClick}) => {
-    const [selectNumber, setSelectNumber] = useState(0)
-    const [isSelectBetNumber, setIsSelectBetNumber] = useState(false)
     const [currentStep, setCurrentStep] = useState(1)
+    const [betAmount, setBetAmount] = useState(0)
 
     if ((endNum - beginNum + 1) % lineCnt !== 0){
         throw new Error('endNum - beginNum + 1 must be a multiple of lineCnt');
@@ -16,9 +15,19 @@ const BetArea = ({beginNum, endNum, lineCnt, onNumberClick}) => {
 
     const handleOnNumberClick = (number) => {
         onNumberClick(number)
-        setIsSelectBetNumber(true)
-        setSelectNumber(number)
         setCurrentStep(2)
+    }
+
+    const handleBetAmountChange = (event) => {
+        setBetAmount(event.target.value)
+    };
+
+    const handleBetClick = (event) => {
+
+    }
+
+    const handleDrawingClick = (event) => {
+
     }
 
     // 渲染列元素
@@ -63,7 +72,10 @@ const BetArea = ({beginNum, endNum, lineCnt, onNumberClick}) => {
             <div className={`${styles.stepTipsShow} ${getTextColor(2)}`}>
                 {currentStep == 2 ? "👉 Step 2. Please set your bet amount!" : "Step 2. Please set your bet amount!"}
             </div>
-            <input type="number" />
+            <div>Bet Amount</div>
+            <input type="number" value={betAmount} onChange={handleBetAmountChange}/>
+            <button type="button" onClick={handleBetClick}>Bet</button>
+            <button type="button" onClick={handleDrawingClick}>Drawing</button>
         </div>
     );    
 }
