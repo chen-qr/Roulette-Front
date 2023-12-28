@@ -14,9 +14,11 @@ function index({}) {
         if (walletAddress != undefined && walletAddress != "") { initPlayerScore(walletAddress, setPlayerScore) }
     }, [walletAddress])
 
+    // deposit amount
     const [depositAmount, setDepositAmount] = useState(0)
     const handleDepositAmountChange = (event) => { setDepositAmount(event.target.value) }   
 
+    // deposit click
     const handleDepositClick = () =>{
         console.log("deposit click", depositAmount)
         deposit(walletAddress, depositAmount)
