@@ -28,9 +28,7 @@ export async function deposit(walletAddress: string, amount: number) {
         return;
     }
 
-    // https://github.com/web3/web3.js/issues/4258
     await rouletteGame.methods
         .deposit()
         .send({from: walletAddress, value: amount});
-        // .send({from: walletAddress, value: amount.toString, type: "0x0", method: 'personal_sign'});
 };
