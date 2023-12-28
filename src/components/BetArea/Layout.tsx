@@ -44,6 +44,10 @@ const BetArea = ({beginNum, endNum, lineCnt, onNumberClick}) => {
         <div>
             <div className={styles.selectNumberShow}>{selectNumberShow}</div>
             {renderRows()}
+            <div>
+                <div>Please set your bet amount!</div>
+                <input type="number" />
+            </div>
         </div>
     );    
 }
