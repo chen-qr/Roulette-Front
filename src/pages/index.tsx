@@ -3,7 +3,7 @@ import Script from 'next/script'
 import React, { useState, useEffect } from 'react'
 import {initWalletAddress} from '../lib/Wallet'
 import {initPlayerScore, deposit, withdraw, betAction, drawingAction} from '../lib/RouletteGame/client'
-import BetNumberArea from '../components/BetNumberArea/Layout'
+import BetArea from '../components/BetArea/Layout'
 
 function index({}) {
     const [walletAddress, setWalletAddress] = useState("")
@@ -95,10 +95,7 @@ function index({}) {
         </div>
         <hr />
         <div>
-            <div>
-                <BetNumberArea color={"red"} number={1}/>
-                <BetNumberArea color={"black"} number={2}/>
-            </div>
+            <BetArea />
         </div>
     </div>
     );
