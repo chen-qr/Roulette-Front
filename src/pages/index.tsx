@@ -9,9 +9,9 @@ function index({}) {
     const [walletAddress, setWalletAddress] = useState("")
     useEffect(() => { initWalletAddress(setWalletAddress) })
 
-    const [logSuggest, setLogSuggest] = useState("Login")
+    const [logSuggest, setLogSuggest] = useState("Please connect your wallet!")
     useEffect(() => { 
-        if (walletAddress != undefined && walletAddress != "") { setLogSuggest("Logout") }
+        if (walletAddress != undefined && walletAddress != "") { setLogSuggest("Wallet connected") }
     }, [walletAddress])
 
     const [playerScore, setPlayerScore] = useState(0)
@@ -61,7 +61,7 @@ function index({}) {
             <Script src="https://cdn.jsdelivr.net/gh/ethereum/web3.js/dist/web3.min.js" />
         </Head>
         <div>
-            <button>{logSuggest}</button>
+            <div>{logSuggest}</div>
             <div>Address: {walletAddress}</div>
         </div>
         <hr />
