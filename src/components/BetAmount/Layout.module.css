@@ -1,0 +1,24 @@
+
+.percentContain {
+    position: relative;
+    width: 300px;
+    height: 10px;
+    background-color: #eee;
+    border-radius: 5px;
+}
+.percentProportion {
+    width: 0;
+    height: 10px;
+    background-color: rgb(93, 233, 64);
+    border-radius: 5px;
+}
+.percentBox {
+    position: absolute;
+    left: 0;
+    top: -3px;
+    width: 15px;
+    height: 15px;
+    background-color: orange;
+    border-radius: 50%;
+    cursor: pointer;
+}

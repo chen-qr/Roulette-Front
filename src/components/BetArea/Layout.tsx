@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import styles from './Layout.module.css'
 import BetNumberArea from '../BetNumberArea/Layout'
+import BetAmount from '../BetAmount/Layout'
 
 const BetArea = ({beginNum, endNum, lineCnt, onNumberClick}) => {
     const [selectedNumber, setSelectedNumber] = useState(0)
@@ -74,6 +75,9 @@ const BetArea = ({beginNum, endNum, lineCnt, onNumberClick}) => {
             <div className={`${styles.stepTipsShow} ${getTextColor(2)}`}>
                 {currentStep == 2 ? "👉 Step 2. Please set your bet amount!" : "Step 2. Please set your bet amount!"}
             </div>
+
+            <BetAmount />
+            
             <div className={styles.betAmountShow}>
                 <input className={styles.betAmountInput} type="number" value={betAmount} onChange={handleBetAmountChange}/>
                 <button type="button" onClick={handleBetClick}>Bet</button>
