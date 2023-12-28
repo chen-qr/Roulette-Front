@@ -72,9 +72,10 @@ const BetArea = ({beginNum, endNum, lineCnt, onNumberClick}) => {
             <div className={`${styles.stepTipsShow} ${getTextColor(2)}`}>
                 {currentStep == 2 ? "👉 Step 2. Please set your bet amount!" : "Step 2. Please set your bet amount!"}
             </div>
-            <div>Bet Amount</div>
-            <input type="number" value={betAmount} onChange={handleBetAmountChange}/>
-            <button type="button" onClick={handleBetClick}>Bet</button>
+            <div className={styles.betAmountShow}>
+                <input className={styles.betAmountInput} type="number" value={betAmount} onChange={handleBetAmountChange}/>
+                <button type="button" onClick={handleBetClick}>Bet</button>
+            </div>
             <button type="button" onClick={handleDrawingClick}>Drawing</button>
         </div>
     );    

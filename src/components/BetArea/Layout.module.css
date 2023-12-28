@@ -15,8 +15,12 @@
     font-size: 1rem;
     color: green;
 }
-
-
 .colLayout {
     display: flex;
+}
+.betAmountShow {
+    display: flex;
+}
+.betAmountInput {
+    margin-top: 10px;
 }
