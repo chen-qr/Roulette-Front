@@ -21,6 +21,12 @@ function index({}) {
     // withdraw amount
     const [withdrawAmount, setWithdrawAmount] = useState(0)
     const handleWithdrawAmountChange = (event) => { setWithdrawAmount(event.target.value) }   
+    // bet number
+    const [betNumber, setBetNumber] = useState(0)
+    const handleBetNumberChange = (event) => { setBetNumber(event.target.value) }
+    // bet amount
+    const [betAmount, setBetAmount] = useState(0)
+    const handleBetAmountChange = (event) => { setBetAmount(event.target.value) }
 
     // deposit click
     const handleDepositClick = () =>{
@@ -61,11 +67,11 @@ function index({}) {
         <div>
             <div>
                 <div>Bet Number</div>
-                <input type="number"/>
+                <input type="number" value={betNumber} onChange={handleBetNumberChange}/>
             </div>
             <div>
                 <div>Bet Amount</div>
-                <input type="number"/>
+                <input type="number" value={betAmount} onChange={handleBetAmountChange}/>
             </div>
         </div>
         <div>
