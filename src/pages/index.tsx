@@ -64,10 +64,10 @@ function index({}) {
             <button>{logSuggest}</button>
             <div>Address: {walletAddress}</div>
         </div>
+        <hr />
         <div>
             <div>Player Score: {playerScore}</div>
         </div>
-        <hr />
         <div>
             <input type="number" value={depositAmount} onChange={handleDepositAmountChange}/>
             <button type="button" onClick={handleDepositClick}>deposit</button>
