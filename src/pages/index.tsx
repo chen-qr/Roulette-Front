@@ -94,9 +94,16 @@ function index({}) {
         <hr />
         <div>
             <div>
-                <div className={styles.betNumberArea}>
+                <div className={`${styles.betNumberArea} ${styles.araeRed}`}>
                     <div className={styles.betText}>
                         1
+                    </div>
+                </div>
+            </div>
+            <div>
+                <div className={styles.betNumberArea}>
+                    <div className={styles.betText}>
+                        2
                     </div>
                 </div>
             </div>
