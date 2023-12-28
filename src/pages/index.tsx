@@ -96,7 +96,7 @@ function index({}) {
         <hr />
         <div>
             <div>Please chose your bet number!</div>
-            <BetArea />
+            <BetArea beginNum={1} endNum={36} lineCnt={3}/>
         </div>
     </div>
     );

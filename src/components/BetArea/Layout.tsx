@@ -2,10 +2,7 @@ import styles from './Layout.module.css'
 
 import BetNumberArea from '../BetNumberArea/Layout'
 
-const BetArea = () => {
-    const beginNum = 1;
-    const endNum = 36;
-    const lineCnt = 3;
+const BetArea = ({beginNum, endNum, lineCnt}) => {
     if ((endNum - beginNum + 1) % lineCnt !== 0){
         throw new Error('endNum - beginNum + 1 must be a multiple of lineCnt');
     }
