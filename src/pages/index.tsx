@@ -52,7 +52,9 @@ function index({}) {
         drawingAction(walletAddress)
     };
 
-    const items = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+    const onNumberClick = (number) => {
+        alert(`you have click ${number}`)
+    }
 
     return (
     <div>
@@ -96,7 +98,7 @@ function index({}) {
         <hr />
         <div>
             <div>Please chose your bet number!</div>
-            <BetArea beginNum={1} endNum={36} lineCnt={3}/>
+            <BetArea beginNum={1} endNum={36} lineCnt={3} onNumberClick={onNumberClick}/>
         </div>
     </div>
     );

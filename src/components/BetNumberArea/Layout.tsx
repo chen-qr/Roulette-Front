@@ -1,6 +1,6 @@
 import styles from './Layout.module.css'
 
-const BetNumberArea = ({color, number}) => {
+const BetNumberArea = ({color, number, onNumberClick}) => {
 
     const getColor = (color) => {
         switch(color) {
@@ -13,11 +13,14 @@ const BetNumberArea = ({color, number}) => {
         }
     }
     
+    const handleOnNumberClick = (event) => {
+        onNumberClick(number)
+    }
 
     // 判断颜色
     
     return (
-        <div className={`${styles.betNumberArea} ${getColor(color)}`}>
+        <div className={`${styles.betNumberArea} ${getColor(color)}`} onClick={handleOnNumberClick}>
             <div className={styles.betText}>
                 {number}
             </div>

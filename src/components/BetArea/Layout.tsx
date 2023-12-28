@@ -2,7 +2,7 @@ import styles from './Layout.module.css'
 
 import BetNumberArea from '../BetNumberArea/Layout'
 
-const BetArea = ({beginNum, endNum, lineCnt}) => {
+const BetArea = ({beginNum, endNum, lineCnt, onNumberClick}) => {
     if ((endNum - beginNum + 1) % lineCnt !== 0){
         throw new Error('endNum - beginNum + 1 must be a multiple of lineCnt');
     }
@@ -16,7 +16,7 @@ const BetArea = ({beginNum, endNum, lineCnt}) => {
         const colItems = colNums.map((iCol) => {
             const number = iCol + (iLine - 1) * colCnt;
             const color = (number + iLine) % 2 === 0 ? "red" : "black"
-            return <BetNumberArea key={iCol}  color={color} number={number} />;
+            return <BetNumberArea key={iCol}  color={color} number={number} onNumberClick={onNumberClick}/>;
         });
         return (
             <div className={styles.colLayout}>{colItems}</div>
