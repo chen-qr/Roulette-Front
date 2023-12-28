@@ -5,6 +5,7 @@ import BetNumberArea from '../BetNumberArea/Layout'
 const BetArea = ({beginNum, endNum, lineCnt, onNumberClick}) => {
     const [selectNumber, setSelectNumber] = useState(0)
     const [isSelectBetNumber, setIsSelectBetNumber] = useState(false)
+    const [currentStep, setCurrentStep] = useState(1)
 
     if ((endNum - beginNum + 1) % lineCnt !== 0){
         throw new Error('endNum - beginNum + 1 must be a multiple of lineCnt');
@@ -17,6 +18,7 @@ const BetArea = ({beginNum, endNum, lineCnt, onNumberClick}) => {
         onNumberClick(number)
         setIsSelectBetNumber(true)
         setSelectNumber(number)
+        setCurrentStep(2)
     }
 
     // 渲染列元素
@@ -42,13 +44,25 @@ const BetArea = ({beginNum, endNum, lineCnt, onNumberClick}) => {
         );
     }
 
+    const getTextColor = (step) => {
+        if (step > currentStep) {
+            return styles.textBlack;
+        } else if (step == currentStep) {
+            return styles.textRed;
+        } else {
+            return styles.textGreed;
+        }
+    };
+
     return (
         <div>
-            <div className={`${styles.selectNumberShow} ${isSelectBetNumber ? styles.selectNumberShowActive : styles.selectNumberShowInActive}`}>
-                {isSelectBetNumber ? `1. You have chose the number ${selectNumber} to bet!` : "1. Please chose your bet number!"}
+            <div className={`${styles.selectNumberShow} ${getTextColor(1)}`}>
+                {isSelectBetNumber ? `1. Please chose your bet number!` : " 👉 1. Please chose your bet number!"}
             </div>
             {renderRows()}
-            <div className={styles.setBetAmountShow}>2. Please set your bet amount!</div>
+            <div className={`${styles.setBetAmountShow} ${getTextColor(2)}`}>
+                2. Please set your bet amount!
+            </div>
             <input type="number" />
         </div>
     );    

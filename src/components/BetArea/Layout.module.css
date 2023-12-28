@@ -3,11 +3,14 @@
     font-weight: bold;
     font-size: 1rem;
 }
-.selectNumberShowActive {
-    color: green;
+.textBlack {
+    color: black;
 }
-.selectNumberShowInActive {
+.textRed {
     color: red;
+}
+.textGreed {
+    color: green;
 }
 
 
