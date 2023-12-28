@@ -95,6 +95,7 @@ function index({}) {
         </div>
         <hr />
         <div>
+            <div>Please chose your bet number!</div>
             <BetArea />
         </div>
     </div>
