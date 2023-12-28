@@ -1,25 +1,22 @@
-.selectNumberShow {
+.stepTipsShow {
     margin-top: 20px;
     font-weight: bold;
-    font-size: 1rem;
+    
 }
 .textBlack {
+    font-size: 1rem;
     color: black;
 }
 .textRed {
+    font-size: 1.5rem;
     color: red;
 }
 .textGreed {
+    font-size: 1rem;
     color: green;
 }
 
 
 .colLayout {
     display: flex;
-}
-
-.setBetAmountShow {
-    margin-top: 20px;
-    font-weight: bold;
-    font-size: 1rem;
 }

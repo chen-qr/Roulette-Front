@@ -56,12 +56,12 @@ const BetArea = ({beginNum, endNum, lineCnt, onNumberClick}) => {
 
     return (
         <div>
-            <div className={`${styles.selectNumberShow} ${getTextColor(1)}`}>
-                {isSelectBetNumber ? `1. Please chose your bet number!` : " 👉 1. Please chose your bet number!"}
+            <div className={`${styles.stepTipsShow} ${getTextColor(1)}`}>
+                {isSelectBetNumber ? `Step 1. Please chose your bet number!` : " 👉 Step 1. Please chose your bet number!"}
             </div>
             {renderRows()}
-            <div className={`${styles.setBetAmountShow} ${getTextColor(2)}`}>
-                2. Please set your bet amount!
+            <div className={`${styles.stepTipsShow} ${getTextColor(2)}`}>
+            Step 2. Please set your bet amount!
             </div>
             <input type="number" />
         </div>
