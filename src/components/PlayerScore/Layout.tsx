@@ -12,7 +12,7 @@ const PlayerScore = ({playerScore}) => {
     }
 
     return (
-        <div>
+        <div className={styles.scoreBoard}>
             <div>Player Score</div>
             <div className={styles.scoreNumber}>{playerScoreText}</div>
         </div>

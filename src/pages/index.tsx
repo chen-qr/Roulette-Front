@@ -57,10 +57,7 @@ function index({}) {
         <Head>
             <Script src="https://cdn.jsdelivr.net/gh/ethereum/web3.js/dist/web3.min.js" />
         </Head>
-        
         <WalletConnect walletAddress={walletAddress}/>
-
-        <hr />
         <PlayerScore playerScore={playerScore}/>
         <div>
             <input type="number" value={depositAmount} onChange={handleDepositAmountChange}/>
