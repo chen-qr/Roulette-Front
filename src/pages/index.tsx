@@ -96,7 +96,7 @@ function index({}) {
         <hr />
         <div>
             <div>
-                <BetNumberArea />
+                <BetNumberArea color={"red"} number={2}/>
             </div>
         </div>
     </div>
