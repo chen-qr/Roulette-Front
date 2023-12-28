@@ -7,7 +7,19 @@
     font-size: 1rem;
 }
 
+.balanceContent {
+    display: flex;
+    flex-wrap: wrap;
+}
+
 .scoreNumber {
     font-size: 2rem;
     color: blue;
+}
+
+.scoreUint {
+    font-size: 1rem;
+}
+.scoreUint:last-child {
+    align-items: flex-end;
 }
