@@ -8,6 +8,12 @@
     display: flex;
     justify-content: center;
     align-items: center;
+
+    cursor: pointer;
+}
+
+.betNumberArea:active {
+    background-color: yellow;
 }
 
 .araeBlack {
