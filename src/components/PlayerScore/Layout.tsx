@@ -6,7 +6,7 @@ const PlayerScore = ({playerScore}) => {
 
     let playerScoreText = "";
     let uintText = ""
-    if (playerScore <= 0) {
+    if (playerScore < 0) {
         playerScoreText = "waiting..."
         uintText = ""
     } else {
