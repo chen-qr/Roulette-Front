@@ -9,6 +9,11 @@ function index({}) {
     const [walletAddress, setWalletAddress] = useState("")
     useEffect(() => { initWalletAddress(setWalletAddress) })
 
+    const [logSuggest, setLogSuggest] = useState("Login")
+    useEffect(() => { 
+        if (walletAddress != undefined && walletAddress != "") { setLogSuggest("Logout") }
+    }, [walletAddress])
+
     const [playerScore, setPlayerScore] = useState(0)
     useEffect(() => { 
         if (walletAddress != undefined && walletAddress != "") { initPlayerScore(walletAddress, setPlayerScore) }
@@ -53,7 +58,7 @@ function index({}) {
             <Script src="https://cdn.jsdelivr.net/gh/ethereum/web3.js/dist/web3.min.js" />
         </Head>
         <div>
-            <div>连接钱包</div>
+            <button>{logSuggest}</button>
             <div>Address: {walletAddress}</div>
         </div>
         <div>
