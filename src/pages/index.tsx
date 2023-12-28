@@ -94,7 +94,7 @@ function index({}) {
         <hr />
         <div>
             <div>
-                <div className={styles.betNumberAreaBlack}>
+                <div className={styles.betNumberArea}>
                     <div className={styles.betText}>
                         1
                     </div>
