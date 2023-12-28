@@ -24,6 +24,10 @@ function index({}) {
         deposit(walletAddress, depositAmount)
     };
 
+    // withdraw amount
+    const [withdrawAmount, setWithdrawAmount] = useState(0)
+    const handleWithdrawAmountChange = (event) => { setWithdrawAmount(event.target.value) }   
+
     return (
     <div>
         <Head>
@@ -42,7 +46,7 @@ function index({}) {
             <button type="button" onClick={handleDepositClick}>deposit</button>
         </div>
         <div>
-            <input type="number"/>
+            <input type="number" value={withdrawAmount} onChange={handleWithdrawAmountChange}/>
             <button type="button">withdraw</button>
         </div>
         <hr />
