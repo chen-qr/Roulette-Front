@@ -79,6 +79,64 @@ export async function betAction(walletAddress: string, betNumber: number, betAmo
     const sequenceNumber = receipt.events.BetRequest.returnValues.sequenceNumber;
     console.log(`   sequence  : ${sequenceNumber}`);
     
+    localStorage.betNumber = betNumber;
+    localStorage.betAmount = betAmount;
     localStorage.userRandomNumber = randomNumber;
     localStorage.sequenceNumber = sequenceNumber;
+};
+
+export async function drawingAction(walletAddress: string) {
+    if (localStorage.betNumber == 0 || localStorage.betAmount == 0 || localStorage.sequenceNumber == 0) {
+        alert("You haven't bet yet! Please make a bet!");
+        return;
+    }
+
+    const fortunaUrl = "https://fortuna-staging.pyth.network";
+    const chainName = "lightlink_pegasus";
+    const url = `${fortunaUrl}/v1/chains/${chainName}/revelations/${localStorage.sequenceNumber}`;
+    const response = await fetch(url, {method: 'get'});
+    let res = await response.json();
+    const providerRandom = `0x${res.value.data}`;
+
+    console.log(`   walletAddress  : ${walletAddress}`);
+    console.log(`   sequenceNumber  : ${localStorage.sequenceNumber}`);
+    console.log(`   userRandomNumber  : ${localStorage.userRandomNumber}`);
+    console.log(`   provider  : ${providerRandom}`);
+    const receipt = await rouletteGame.methods
+        .drawing(walletAddress, 
+            localStorage.sequenceNumber, 
+            localStorage.userRandomNumber, 
+            providerRandom)
+        .send({ from: walletAddress });
+
+    const randomNumber = receipt.events.DrawingRequest.returnValues.randomNumber;
+    const drawNumber = receipt.events.DrawingRequest.returnValues.drawNumber;
+    const isWin = receipt.events.DrawingRequest.returnValues.isWin;
+    console.log(`   randomNumber  : ${randomNumber}`);
+    console.log(`   drawNumber  : ${drawNumber}`);
+    console.log(`   isWin  : ${isWin}`);
+    
+    const currentTime = new Date();
+    const year = currentTime.getFullYear();
+    const month = String(currentTime.getMonth() + 1).padStart(2, '0'); // 月份从0开始，所以要加1
+    const day = String(currentTime.getDate()).padStart(2, '0');
+    const hours = String(currentTime.getHours()).padStart(2, '0');
+    const minutes = String(currentTime.getMinutes()).padStart(2, '0');
+    const seconds = String(currentTime.getSeconds()).padStart(2, '0');
+
+    const formattedTime = `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
+    const result = {
+        drawingTime: formattedTime,
+        betNumber: localStorage.betNumber,
+        betAmount: localStorage.betAmount,
+        betResult: isWin ? "win" : "lose",
+    };
+
+    let betResults = JSON.parse(localStorage.getItem('betResults'));
+    if (betResults == undefined || !Array.isArray(betResults) || betResults.length <= 0) {
+        betResults= new Array(result);
+    } else {
+        betResults.push(result);
+    }
+    localStorage.setItem('betResults', JSON.stringify(betResults));
 };
