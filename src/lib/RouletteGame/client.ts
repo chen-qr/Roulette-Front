@@ -6,7 +6,6 @@ let web3: Web3 = null;
 
 function getContract(walletAddress: string) {
     if (rouletteGame == undefined || rouletteGame == null) {
-        console.log("Initializing contract");
         web3 = new Web3(window.ethereum);
         rouletteGame = new web3.eth.Contract(abi, contractAddress, {from: walletAddress});
     }
