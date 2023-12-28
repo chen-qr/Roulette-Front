@@ -3,8 +3,9 @@ import Script from 'next/script'
 import React, { useState, useEffect } from 'react'
 import {initWalletAddress} from '../lib/Wallet'
 import {initPlayerScore, deposit, withdraw, betAction, drawingAction} from '../lib/RouletteGame/client'
-import BetArea from '../components/BetArea/Layout'
 import WalletConnect from '../components/WalletConnect/Layout'
+import PlayerScore from '../components/PlayerScore/Layout'
+import BetArea from '../components/BetArea/Layout'
 
 function index({}) {
     const [walletAddress, setWalletAddress] = useState("")
@@ -60,9 +61,7 @@ function index({}) {
         <WalletConnect walletAddress={walletAddress}/>
 
         <hr />
-        <div>
-            <div>Player Score: {playerScore}</div>
-        </div>
+        <PlayerScore playerScore={playerScore}/>
         <div>
             <input type="number" value={depositAmount} onChange={handleDepositAmountChange}/>
             <button type="button" onClick={handleDepositClick}>deposit</button>
