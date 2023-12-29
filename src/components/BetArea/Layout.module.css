@@ -1,5 +1,12 @@
+.main {
+    margin-top: 10px;
+    border: 2px solid green;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
 .stepTipsShow {
-    margin-top: 20px;
+    margin-top: 10px;
     font-weight: bold;
     
 }
@@ -9,7 +16,7 @@
 }
 .textRed {
     font-size: 1.5rem;
-    color: red;
+    color:blue;
 }
 .textGreed {
     font-size: 1rem;
