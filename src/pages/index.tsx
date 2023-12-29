@@ -48,6 +48,7 @@ function index({}) {
 
     return (
     <div className={styles.main}>
+        <div className={styles.title}>LightLink APAC Hackthoon - Chanllenge 1</div>
         <WalletConnect walletAddress={walletAddress}/>
         <PlayerScore playerScore={playerScore}/>
         <div>
