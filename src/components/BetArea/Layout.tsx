@@ -112,8 +112,9 @@ const BetArea = ({beginNum, endNum, lineCnt, playerScore, onBetAction, onDwaring
             <div className={`${styles.stepTipsShow} ${getTextColor(1)}`}>
                 {currentStep == 1 ? " 👉 Step 1. Please chose your bet number!" : `Step 1. You have chose bet number!`}
             </div>
-            {renderRows()}
-
+            <div className={styles.betNumbers}>
+                {renderRows()}
+            </div>
             <div className={`${styles.stepTipsShow} ${getTextColor(2)}`}>
                 {currentStep == 2 ? "👉 Step 2. Please set your bet amount!" : "Step 2. You have set bet amount!"}
             </div>

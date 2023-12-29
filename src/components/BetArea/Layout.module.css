@@ -17,6 +17,12 @@
     align-items: center;
 }
 
+.betNumbers {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 .stepTipsShow {
     margin-top: 10px;
     font-weight: bold;
