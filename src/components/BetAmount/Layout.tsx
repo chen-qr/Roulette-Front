@@ -19,6 +19,9 @@ const BetAmount = ({}) => {
     const boxRef = useRef<HTMLElement>(null);
     const proportionRef = useRef<HTMLDivElement>(null);
 
+    const CONTAIN_WIDTH = 300;
+    const BOX_WIDTH = 15;
+
     function handleBoxOnMouseDown(e) {
         setIsMouseDown(true)
         const box = boxRef.current
@@ -57,8 +60,8 @@ const BetAmount = ({}) => {
 
         if (leftNum < 0) {
             setLeftNum(0);
-        } else if (leftNum > 285) {
-            setLeftNum(285);
+        } else if (leftNum > (CONTAIN_WIDTH - BOX_WIDTH)) {
+            setLeftNum(CONTAIN_WIDTH - BOX_WIDTH);
         }
 
         proportion.style.width = (leftNum + 15) + 'px';
