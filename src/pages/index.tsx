@@ -1,6 +1,5 @@
-import Head from 'next/head'
-import Script from 'next/script'
 import React, { useState, useEffect } from 'react'
+import styles from './index.module.css'
 import {initWalletAddress} from '../lib/Wallet'
 import {initPlayerScore, deposit, withdraw, betAction, drawingAction} from '../lib/RouletteGame/client'
 import WalletConnect from '../components/WalletConnect/Layout'
@@ -48,7 +47,7 @@ function index({}) {
     }
 
     return (
-    <div>
+    <div className={styles.main}>
         <WalletConnect walletAddress={walletAddress}/>
         <PlayerScore playerScore={playerScore}/>
         <div>
