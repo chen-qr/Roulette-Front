@@ -3,7 +3,7 @@ import styles from './Layout.module.css'
 import BetNumberArea from '../BetNumberArea/Layout'
 import BetAmount from '../BetAmount/Layout'
 
-const BetArea = ({beginNum, endNum, lineCnt, playerScore, onBetAction}) => {
+const BetArea = ({beginNum, endNum, lineCnt, playerScore, onBetAction, onDwaringAction}) => {
     const [selectedNumber, setSelectedNumber] = useState(0)
     const [currentStep, setCurrentStep] = useState(1)
     const [betAmount, setBetAmount] = useState(0)
@@ -33,7 +33,7 @@ const BetArea = ({beginNum, endNum, lineCnt, playerScore, onBetAction}) => {
     }
 
     const handleDrawingClick = (event) => {
-
+        onDwaringAction()
     }
 
     // 渲染列元素

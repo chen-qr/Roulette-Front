@@ -43,10 +43,6 @@ function index({}) {
         drawingAction(walletAddress)
     };
 
-    const onNumberClick = (number) => {
-        // setBetNumber(number)
-    }
-
     return (
     <div>
         <Head>
@@ -64,6 +60,7 @@ function index({}) {
         </div>
         <BetArea beginNum={1} endNum={36} lineCnt={3} playerScore={playerScore}
             onBetAction={handleOnBetAction}
+            onDwaringAction={handleDrawingClick}
             />
     </div>
     );
