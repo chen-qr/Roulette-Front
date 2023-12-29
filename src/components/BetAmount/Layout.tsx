@@ -21,20 +21,8 @@ const BetAmount = ({}) => {
         setIsMouseDown(true)
         const box = boxRef.current
         
-        let pageX;
-        let pageY;
-        if (e.type == "touchstart") {
-            pageX = e.targetTouches[0].pageX
-            pageY = e.targetTouches[0].pageY
-        } else if (e.type == "mousedown") {
-            pageX = e.pageX;
-            pageY = e.pageY;
-        } else {
-            console.log(e)
-        }
-
-        setTouchStartX(pageX)
-        setTouchStartY(pageY)
+        setTouchStartX(e.pageX)
+        setTouchStartY(e.pageY)
 
         setBoxStartX(parseInt(document.defaultView.getComputedStyle(box).left.replace('px', '')))
         setBoxStartY(parseInt(document.defaultView.getComputedStyle(box).top.replace('px', '')))
@@ -59,21 +47,8 @@ const BetAmount = ({}) => {
         const contain = containRef.current;
         const box = boxRef.current;
 
-        let pageX;
-        let pageY;
-        if (e.type == "touchmove") {
-            pageX = e.targetTouches[0].pageX
-            pageY = e.targetTouches[0].pageY
-        } else if (e.type == "mousemove") {
-            pageX = e.pageX;
-            pageY = e.pageY;
-            setNumber(number + 1)
-        } else {
-            console.log(e)
-        }
-
-        setTouchMoveX(pageX - touchStartX);
-        setTouchMoveY(pageY - touchStartY);
+        setTouchMoveX(e.pageX - touchStartX);
+        setTouchMoveY(e.pageY - touchStartY);
         
         let leftNum = boxStartX + toucMoveX;
         if (leftNum < 0) {
