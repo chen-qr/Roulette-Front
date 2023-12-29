@@ -23,11 +23,6 @@ function index({}) {
     // withdraw amount
     const [withdrawAmount, setWithdrawAmount] = useState(0)
     const handleWithdrawAmountChange = (event) => { setWithdrawAmount(event.target.value) }   
-    // bet number
-    // const [betNumber, setBetNumber] = useState(0)
-    // bet amount
-    // const [betAmount, setBetAmount] = useState(0)
-    // const handleBetAmountChange = (event) => { setBetAmount(event.target.value) }
 
     // deposit click
     const handleDepositClick = () =>{
