@@ -44,6 +44,7 @@ function index({}) {
     };
 
     const handleSaveBetResult = (selectedNumber, betAmount, userRandomNumber, commitment, sequenceNumber, providerRandom, finalRandomNumber, drawNumber, isWin) => {
+        onPlayerScoreChange()
     }
 
     return (

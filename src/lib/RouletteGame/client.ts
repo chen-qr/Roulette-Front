@@ -52,8 +52,8 @@ export async function withdraw(walletAddress: string, amount: number, playerScor
 };
 
 export async function betAction(walletAddress: string, betNumber: number, betAmount: number, playerScore: number, handleOnBetFinish) {
-    if (betNumber <= 0 || betNumber > 12) {
-        alert("Bet number must between 1 and 12!");
+    if (betNumber <= 0 || betNumber > 36) {
+        alert("Bet number must between 1 and 36!");
         return;
     }
     if (betAmount <= 0 || betAmount > playerScore) {

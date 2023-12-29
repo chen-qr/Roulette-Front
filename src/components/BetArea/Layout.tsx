@@ -14,7 +14,7 @@ const BetArea = ({beginNum, endNum, lineCnt, playerScore, onBetAction, onDwaring
     const [providerRandom, setProviderRandom] = useState(0)
     const [finalRandomNumber, setFinalRandomNumber] = useState(0)
     const [drawNumber, setDrawNumber] = useState(0)
-    const [isWin, setIsWin] = useState(false)
+    const [isWin, setIsWin] = useState(null)
 
     const [betActionTips, setBetActionTips] = useState("Bet")
     const [drawingActionTips, setDrawingActionTips] = useState("Drawing")
@@ -58,8 +58,19 @@ const BetArea = ({beginNum, endNum, lineCnt, playerScore, onBetAction, onDwaring
         setDrawNumber(drawNumber)
         setIsWin(isWin)
         setDrawingActionTips("Drawing")
-
+        
         handleSaveBetResult(selectedNumber, betAmount, userRandomNumber, commitment, sequenceNumber, providerRandom, finalRandomNumber, drawNumber, isWin)
+        setCurrentStep(1)
+        // clear
+        setSelectedNumber(0)
+        setBetAmount(0)
+        setUserRandomNumber(0)
+        setCommitment(0)
+        setSequenceNumber(0)
+        setProviderRandom(0)
+        setFinalRandomNumber(0)
+        setDrawNumber(0)
+        setIsWin(null)
     }
 
     // 渲染列元素
