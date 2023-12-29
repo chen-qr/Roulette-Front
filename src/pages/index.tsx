@@ -49,9 +49,6 @@ function index({}) {
 
     return (
     <div>
-        <Head>
-            <Script src="https://cdn.jsdelivr.net/gh/ethereum/web3.js/dist/web3.min.js" />
-        </Head>
         <WalletConnect walletAddress={walletAddress}/>
         <PlayerScore playerScore={playerScore}/>
         <div>
