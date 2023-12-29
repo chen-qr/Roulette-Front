@@ -17,7 +17,7 @@ const PlayerScore = ({playerScore}) => {
 
     return (
         <div className={styles.scoreBoard}>
-            <div className={styles.balance}>Your balance</div>
+            <div className={styles.balance}>Your balance:</div>
             <div className={styles.balanceContent}>
                 <div className={styles.scoreNumber}>{playerScoreText}</div>
                 <div className={styles.scoreUint}>{uintText}</div>
