@@ -6,6 +6,17 @@
     padding-bottom: 10px;
 }
 
+.gameTitle {
+    width: 100%;
+    padding: 5px;
+    font-weight: bold;
+    font-size: 2rem;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 .stepTipsShow {
     margin-top: 10px;
     font-weight: bold;
