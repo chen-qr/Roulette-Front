@@ -43,6 +43,9 @@ function index({}) {
         drawingAction(walletAddress, selectedNumber, betAmount, userRandomNumber, sequenceNumber, handleOnDrawingFinish)
     };
 
+    const handleSaveBetResult = (selectedNumber, betAmount, userRandomNumber, commitment, sequenceNumber, providerRandom, finalRandomNumber, drawNumber, isWin) => {
+    }
+
     return (
     <div>
         <Head>
@@ -61,6 +64,7 @@ function index({}) {
         <BetArea beginNum={1} endNum={36} lineCnt={3} playerScore={playerScore}
             onBetAction={handleOnBetAction}
             onDwaringAction={handleDrawingClick}
+            handleSaveBetResult={handleSaveBetResult}
             />
     </div>
     );

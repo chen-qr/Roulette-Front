@@ -3,7 +3,7 @@ import styles from './Layout.module.css'
 import BetNumberArea from '../BetNumberArea/Layout'
 import BetAmount from '../BetAmount/Layout'
 
-const BetArea = ({beginNum, endNum, lineCnt, playerScore, onBetAction, onDwaringAction}) => {
+const BetArea = ({beginNum, endNum, lineCnt, playerScore, onBetAction, onDwaringAction, handleSaveBetResult}) => {
     const [currentStep, setCurrentStep] = useState(1)
     // bet info
     const [selectedNumber, setSelectedNumber] = useState(0)
@@ -58,6 +58,8 @@ const BetArea = ({beginNum, endNum, lineCnt, playerScore, onBetAction, onDwaring
         setDrawNumber(drawNumber)
         setIsWin(isWin)
         setDrawingActionTips("Drawing")
+
+        handleSaveBetResult(selectedNumber, betAmount, userRandomNumber, commitment, sequenceNumber, providerRandom, finalRandomNumber, drawNumber, isWin)
     }
 
     // 渲染列元素
