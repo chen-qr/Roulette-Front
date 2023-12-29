@@ -32,3 +32,16 @@
     align-items: center;
 }
 
+.drawingAction {
+    width: 80px;
+    height: 30px;
+    background-color: green;
+    color: white;
+    font-weight: bold;
+    border-radius: 5px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+

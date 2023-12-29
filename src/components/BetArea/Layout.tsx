@@ -86,7 +86,7 @@ const BetArea = ({beginNum, endNum, lineCnt, playerScore, onBetAction}) => {
                 {currentStep == 3 ? "👉 Step 3. Please draw the winning number!" : "Step 3. Please draw the winning number!"}
             </div>
 
-            <button type="button" onClick={handleDrawingClick}>Drawing</button>
+            <div className={styles.drawingAction} onClick={handleDrawingClick}>Drawing</div>
         </div>
     );    
 }
