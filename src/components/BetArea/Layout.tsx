@@ -41,7 +41,7 @@ const BetArea = ({beginNum, endNum, lineCnt, playerScore, onBetAction}) => {
         const colItems = colNums.map((iCol) => {
             const number = iCol + (iLine - 1) * colCnt;
             const color = (number + iLine) % 2 === 0 ? "red" : "black"
-            return <BetNumberArea key={iCol}  color={color} number={number} onNumberClick={handleOnNumberClick} currentNum={selectedNumber}/>;
+            return <BetNumberArea key={iCol}  color={color} number={number} onNumberClick={handleOnNumberClick} currentNum={selectedNumber} twinkleNumber={1}/>;
         });
         return (
             <div className={styles.colLayout}>{colItems}</div>

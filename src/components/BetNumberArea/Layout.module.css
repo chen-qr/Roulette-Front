@@ -38,7 +38,7 @@
 .betText {
     width: 50%;
     height: 50%;
-    color: white;
+    /* color: white; */
 
     /* 子元素居中展示 */
     display: flex;
@@ -46,8 +46,18 @@
     align-items: center;
 
     /* 画圆边 */
-    border-color: white;
+    /* border-color: white; */
     border-width: 1px;
     border-style: solid;
     border-radius: 5px;
+}
+
+.betTextColorWhite {
+    color: white;
+    border-color: white;
+}
+
+.betTextColorTwinkle {
+    color: yellow;   
+    border-color: yellow;
 }
