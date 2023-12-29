@@ -98,7 +98,8 @@ const BetAmount = ({playerScore}) => {
                     onMouseLeave={handleBoxOnMouseUpAndLeave}
                 ></span>
             </div>
-            <span>{(betRatio * 100).toFixed(0) + "%"} {betAmount.toLocaleString()}</span>
+            <span>Bet {(betRatio * 100).toFixed(0) + "%"} of your Balance!</span>
+            <span>{betAmount.toLocaleString()}</span>
         </div>
     );
 };
