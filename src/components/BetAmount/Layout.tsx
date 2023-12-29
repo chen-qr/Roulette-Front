@@ -12,7 +12,7 @@ const BetAmount = ({playerScore}) => {
     
     const [maxLength, setMaxLength] = useState(0)
     const [leftNum, setLeftNum] = useState(0)
-    const [betRatio, setBetRatio] = useState(0.1)
+    const [betRatio, setBetRatio] = useState(0)
     const [betAmount, setBetAmount] = useState(0)
 
     const containRef = useRef<HTMLDivElement>(null);
@@ -98,7 +98,7 @@ const BetAmount = ({playerScore}) => {
                     onMouseLeave={handleBoxOnMouseUpAndLeave}
                 ></span>
             </div>
-            <span>{(betRatio * 100).toFixed(0) + "%"} {betAmount}</span>
+            <span>{(betRatio * 100).toFixed(0) + "%"} {betAmount.toLocaleString()}</span>
         </div>
     );
 };
