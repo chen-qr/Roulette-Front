@@ -8,6 +8,7 @@ const BetArea = ({beginNum, endNum, lineCnt, playerScore, onBetAction}) => {
     const [currentStep, setCurrentStep] = useState(1)
     const [betAmount, setBetAmount] = useState(0)
     const [betActionTips, setBetActionTips] = useState("Bet")
+    const [twinkleNumber, setTwinkleNumber] = useState(0)
 
     if ((endNum - beginNum + 1) % lineCnt !== 0){
         throw new Error('endNum - beginNum + 1 must be a multiple of lineCnt');
@@ -41,7 +42,7 @@ const BetArea = ({beginNum, endNum, lineCnt, playerScore, onBetAction}) => {
         const colItems = colNums.map((iCol) => {
             const number = iCol + (iLine - 1) * colCnt;
             const color = (number + iLine) % 2 === 0 ? "red" : "black"
-            return <BetNumberArea key={iCol}  color={color} number={number} onNumberClick={handleOnNumberClick} currentNum={selectedNumber} twinkleNumber={1}/>;
+            return <BetNumberArea key={iCol}  color={color} number={number} onNumberClick={handleOnNumberClick} currentNum={selectedNumber} twinkleNumber={twinkleNumber}/>;
         });
         return (
             <div className={styles.colLayout}>{colItems}</div>
