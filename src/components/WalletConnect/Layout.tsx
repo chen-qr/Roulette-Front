@@ -14,7 +14,7 @@ const WalletConnect = ({walletAddress}) => {
     const getActiveColor = () => { return isActive ? styles.logSuggestActive : styles.logSuggestInActive}
 
     return (
-        <div>
+        <div className={styles.main}>
             <div>
                 <div className={`${styles.logSuggest} ${getActiveColor()}`}>{logSuggest}</div>
                 <div>Address: {walletAddress}</div>
