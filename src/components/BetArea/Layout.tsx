@@ -17,7 +17,6 @@ const BetArea = ({beginNum, endNum, lineCnt, playerScore, onBetAction}) => {
     const lineNums = Array.from({length: lineCnt}, (_, i) => i + beginNum);
 
     const handleOnNumberClick = (number) => {
-        // onNumberClick(number)
         setSelectedNumber(number)
         setCurrentStep(2)
     }
@@ -72,12 +71,12 @@ const BetArea = ({beginNum, endNum, lineCnt, playerScore, onBetAction}) => {
     return (
         <div>
             <div className={`${styles.stepTipsShow} ${getTextColor(1)}`}>
-                {currentStep == 1 ? " 👉 Step 1. Please chose your bet number!" : `Step 1. Please chose your bet number!`}
+                {currentStep == 1 ? " 👉 Step 1. Please chose your bet number!" : `Step 1. You have chose bet number!`}
             </div>
             {renderRows()}
 
             <div className={`${styles.stepTipsShow} ${getTextColor(2)}`}>
-                {currentStep == 2 ? "👉 Step 2. Please set your bet amount!" : "Step 2. Please set your bet amount!"}
+                {currentStep == 2 ? "👉 Step 2. Please set your bet amount!" : "Step 2. You have set bet amount!"}
             </div>
             <BetAmount playerScore={playerScore} betAmount={betAmount} setBetAmount={setBetAmount}/>
             <div className={styles.betAction} onClick={handleOnBetClick}>{betActionTips}</div>
