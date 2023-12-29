@@ -78,8 +78,8 @@ const BetArea = ({beginNum, endNum, lineCnt, onNumberClick, playerScore}) => {
             </div>
 
             <BetAmount playerScore={playerScore}/>
-            <button type="button" onClick={handleBetClick}>Bet</button>
-            
+            <div className={styles.betAction} onClick={handleBetClick}>Bet</div>
+
             <button type="button" onClick={handleDrawingClick}>Drawing</button>
         </div>
     );    
