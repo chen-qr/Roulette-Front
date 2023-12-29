@@ -45,7 +45,7 @@ const PlayerScore = ({playerScore, onHandleDeposit, onHandleWithdraw}) => {
         if (isShowChangeAmountInput) {
             return (
                 <div style={{display: 'flex'}}>
-                    <div style={{display: 'inline-block', marginLeft: 2}}>Input {changeType} amount: </div>
+                    <div style={{display: 'inline-block', marginLeft: 2}}>{changeType === "deposit" ? "Input deposit amount (must > 100000000)" : "Input withdraw amount (must <= balance)"}</div>
                     <input className={styles.changeScoreInput} type="number" onChange={onHandleInput}/>
                     <button style={{marginLeft: 2}} onClick={onHandleSubmit}>submit</button>
                 </div>

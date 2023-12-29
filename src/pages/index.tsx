@@ -16,13 +16,6 @@ function index({}) {
     }, [walletAddress])
     const onPlayerScoreChange = () => { initPlayerScore(walletAddress, setPlayerScore) }
 
-    // deposit amount
-    const [depositAmount, setDepositAmount] = useState(0)
-    const handleDepositAmountChange = (event) => { setDepositAmount(event.target.value) }   
-    // withdraw amount
-    const [withdrawAmount, setWithdrawAmount] = useState(0)
-    const handleWithdrawAmountChange = (event) => { setWithdrawAmount(event.target.value) }   
-
     // deposit click
     const handleDepositClick = (depositAmount) =>{
         deposit(walletAddress, depositAmount)
