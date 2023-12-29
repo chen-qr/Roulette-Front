@@ -13,6 +13,17 @@
     flex-wrap: wrap;
 }
 
+.changeScore {
+    margin-top: 1px;
+    display: flex;
+}
+
+.deposit {
+    display: inline-block;
+    margin-left: 2px;
+    margin-right: 2px;
+}
+
 .scoreNumber {
     font-size: 1.5rem;
     color: blue;

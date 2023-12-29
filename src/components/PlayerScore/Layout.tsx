@@ -22,6 +22,17 @@ const PlayerScore = ({playerScore}) => {
                 <div className={styles.scoreNumber}>{playerScoreText}</div>
                 <div className={styles.scoreUint}>{uintText}</div>
             </div>
+            <div className={styles.changeScore}>
+                <div>Click </div>
+                <button className={styles.deposit} type="button">deposit</button> 
+                <div>to deposit ETH to the contract and increase your balance. </div>
+            </div>
+            <div className={styles.changeScore}>
+                <div>Click </div>
+                <button className={styles.deposit} type="button">withdraw</button> 
+                <div>to withdraw ETH from the contract and reduce your balance. </div>
+            </div>
+
         </div>
     );    
     
