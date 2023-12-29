@@ -67,7 +67,7 @@ function index({}) {
             <input type="number" value={withdrawAmount} onChange={handleWithdrawAmountChange}/>
             <button type="button" onClick={handleWithdrawClick}>withdraw</button>
         </div>
-        <BetArea beginNum={1} endNum={36} lineCnt={3} onNumberClick={onNumberClick}/>
+        <BetArea beginNum={1} endNum={36} lineCnt={3} onNumberClick={onNumberClick} playerScore={playerScore}/>
     </div>
     );
 }

@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from 'react'
 import styles from './Layout.module.css'
 
-const BetAmount = ({}) => {
+const BetAmount = ({playerScore}) => {
     const [touchStartX, setTouchStartX] = useState(0)
     const [touchStartY, setTouchStartY] = useState(0)
     const [toucMoveX, setTouchMoveX] = useState(0)
@@ -13,7 +13,7 @@ const BetAmount = ({}) => {
     const [maxLength, setMaxLength] = useState(0)
     const [leftNum, setLeftNum] = useState(0)
     const [betRatio, setBetRatio] = useState(0.1)
-    const [number, setNumber] = useState(0)
+    const [betAmount, setBetAmount] = useState(0)
 
     const containRef = useRef<HTMLDivElement>(null);
     const boxRef = useRef<HTMLElement>(null);
@@ -52,7 +52,7 @@ const BetAmount = ({}) => {
         const contain = containRef.current;
         const box = boxRef.current;
 
-        setMaxLength(parseInt(contain.style.width.replace('px', '')))
+        setMaxLength(parseInt(document.defaultView.getComputedStyle(contain).width.replace('px', '')))
         setTouchMoveX(e.pageX - touchStartX);
         setTouchMoveY(e.pageY - touchStartY);
 
@@ -64,21 +64,26 @@ const BetAmount = ({}) => {
             setLeftNum(CONTAIN_WIDTH - BOX_WIDTH);
         }
 
-        proportion.style.width = (leftNum + 15) + 'px';
-        
-        if ((boxStartX + toucMoveX) <= 0) {
-            let txt = "0%";
-            // setNumber(txt)
+        let amount;
+        let ratio;
+        if (leftNum <= 0) {
+            ratio = 0
+            amount = 0
         }
-        else if( (boxStartX + toucMoveX) >= 285){
-            let txt = (((leftNum + 15) / maxLength) * 100).toFixed(0) + "%";
-            // setNumber(txt)
+        else if( leftNum >= CONTAIN_WIDTH - BOX_WIDTH){
+            ratio = 1
+            amount = playerScore
         }
         else{
-            let txt = ((leftNum / maxLength) * 100).toFixed(0) + "%";
-            // setNumber(txt)
+            ratio = leftNum / maxLength
+            amount = playerScore * (leftNum / maxLength)
         }
+        setBetRatio(ratio)
+        setBetAmount(parseInt(amount))
 
+        // 进度条背景
+        proportion.style.width = (leftNum + BOX_WIDTH) + 'px';
+        // 拖拽按钮
         box.style.left = leftNum + 'px';
     };
 
@@ -93,7 +98,7 @@ const BetAmount = ({}) => {
                     onMouseLeave={handleBoxOnMouseUpAndLeave}
                 ></span>
             </div>
-            <span>{number}</span>
+            <span>{(betRatio * 100).toFixed(0) + "%"} {betAmount}</span>
         </div>
     );
 };

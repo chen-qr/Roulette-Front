@@ -3,7 +3,7 @@ import styles from './Layout.module.css'
 import BetNumberArea from '../BetNumberArea/Layout'
 import BetAmount from '../BetAmount/Layout'
 
-const BetArea = ({beginNum, endNum, lineCnt, onNumberClick}) => {
+const BetArea = ({beginNum, endNum, lineCnt, onNumberClick, playerScore}) => {
     const [selectedNumber, setSelectedNumber] = useState(0)
     const [currentStep, setCurrentStep] = useState(1)
     const [betAmount, setBetAmount] = useState(0)
@@ -76,7 +76,7 @@ const BetArea = ({beginNum, endNum, lineCnt, onNumberClick}) => {
                 {currentStep == 2 ? "👉 Step 2. Please set your bet amount!" : "Step 2. Please set your bet amount!"}
             </div>
 
-            <BetAmount />
+            <BetAmount playerScore={playerScore}/>
             
             <div className={styles.betAmountShow}>
                 <input className={styles.betAmountInput} type="number" value={betAmount} onChange={handleBetAmountChange}/>
