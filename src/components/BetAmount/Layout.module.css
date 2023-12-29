@@ -24,3 +24,8 @@
     border-radius: 50%;
     cursor: pointer;
 }
+
+.betAmount {
+    font-size: 1.5rem;
+    color: red;
+}
