@@ -24,10 +24,10 @@ function index({}) {
     const [withdrawAmount, setWithdrawAmount] = useState(0)
     const handleWithdrawAmountChange = (event) => { setWithdrawAmount(event.target.value) }   
     // bet number
-    const [betNumber, setBetNumber] = useState(0)
+    // const [betNumber, setBetNumber] = useState(0)
     // bet amount
-    const [betAmount, setBetAmount] = useState(0)
-    const handleBetAmountChange = (event) => { setBetAmount(event.target.value) }
+    // const [betAmount, setBetAmount] = useState(0)
+    // const handleBetAmountChange = (event) => { setBetAmount(event.target.value) }
 
     // deposit click
     const handleDepositClick = () =>{
@@ -40,8 +40,8 @@ function index({}) {
         onPlayerScoreChange()
     };
     // bet click
-    const handleBetClick = () =>{
-        betAction(walletAddress, betNumber, betAmount, playerScore)
+    const handleOnBetAction = (selectedNumber, betAmount) =>{
+        betAction(walletAddress, selectedNumber, betAmount, playerScore)
     };
     // drawing click
     const handleDrawingClick = () =>{
@@ -49,7 +49,7 @@ function index({}) {
     };
 
     const onNumberClick = (number) => {
-        setBetNumber(number)
+        // setBetNumber(number)
     }
 
     return (
@@ -67,7 +67,9 @@ function index({}) {
             <input type="number" value={withdrawAmount} onChange={handleWithdrawAmountChange}/>
             <button type="button" onClick={handleWithdrawClick}>withdraw</button>
         </div>
-        <BetArea beginNum={1} endNum={36} lineCnt={3} onNumberClick={onNumberClick} playerScore={playerScore}/>
+        <BetArea beginNum={1} endNum={36} lineCnt={3} playerScore={playerScore}
+            onBetAction={handleOnBetAction}
+            />
     </div>
     );
 }

@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from 'react'
 import styles from './Layout.module.css'
 
-const BetAmount = ({playerScore}) => {
+const BetAmount = ({playerScore, betAmount, setBetAmount}) => {
     const [touchStartX, setTouchStartX] = useState(0)
     const [touchStartY, setTouchStartY] = useState(0)
     const [toucMoveX, setTouchMoveX] = useState(0)
@@ -13,7 +13,7 @@ const BetAmount = ({playerScore}) => {
     const [maxLength, setMaxLength] = useState(0)
     const [leftNum, setLeftNum] = useState(0)
     const [betRatio, setBetRatio] = useState(0)
-    const [betAmount, setBetAmount] = useState(0)
+    // const [betAmount, setBetAmount] = useState(0)
 
     const containRef = useRef<HTMLDivElement>(null);
     const boxRef = useRef<HTMLElement>(null);

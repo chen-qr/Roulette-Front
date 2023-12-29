@@ -3,7 +3,7 @@ import styles from './Layout.module.css'
 import BetNumberArea from '../BetNumberArea/Layout'
 import BetAmount from '../BetAmount/Layout'
 
-const BetArea = ({beginNum, endNum, lineCnt, onNumberClick, playerScore}) => {
+const BetArea = ({beginNum, endNum, lineCnt, playerScore, onBetAction}) => {
     const [selectedNumber, setSelectedNumber] = useState(0)
     const [currentStep, setCurrentStep] = useState(1)
     const [betAmount, setBetAmount] = useState(0)
@@ -16,17 +16,13 @@ const BetArea = ({beginNum, endNum, lineCnt, onNumberClick, playerScore}) => {
     const lineNums = Array.from({length: lineCnt}, (_, i) => i + beginNum);
 
     const handleOnNumberClick = (number) => {
-        onNumberClick(number)
+        // onNumberClick(number)
         setSelectedNumber(number)
         setCurrentStep(2)
     }
 
-    const handleBetAmountChange = (event) => {
-        setBetAmount(event.target.value)
-    };
-
-    const handleBetClick = (event) => {
-
+    const handleOnBetClick = (event) => {
+        onBetAction(selectedNumber, betAmount)
     }
 
     const handleDrawingClick = (event) => {
@@ -76,8 +72,8 @@ const BetArea = ({beginNum, endNum, lineCnt, onNumberClick, playerScore}) => {
             <div className={`${styles.stepTipsShow} ${getTextColor(2)}`}>
                 {currentStep == 2 ? "👉 Step 2. Please set your bet amount!" : "Step 2. Please set your bet amount!"}
             </div>
-            <BetAmount playerScore={playerScore}/>
-            <div className={styles.betAction} onClick={handleBetClick}>Bet</div>
+            <BetAmount playerScore={playerScore} betAmount={betAmount} setBetAmount={setBetAmount}/>
+            <div className={styles.betAction} onClick={handleOnBetClick}>Bet</div>
 
             <div className={`${styles.stepTipsShow} ${getTextColor(3)}`}>
                 {currentStep == 3 ? "👉 Step 3. Please draw the winning number!" : "Step 3. Please draw the winning number!"}

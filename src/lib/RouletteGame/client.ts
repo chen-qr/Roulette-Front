@@ -58,7 +58,7 @@ export async function betAction(walletAddress: string, betNumber: number, betAmo
         return;
     }
     if (betAmount <= 0 || betAmount > playerScore) {
-        alert("Bet amount must be greater than zero and smaller than player balance!");
+        alert(`Bet amount ${betAmount} must be greater than zero and smaller than player balance!`);
         return;
     }
 
