@@ -24,12 +24,12 @@ function index({}) {
     const handleWithdrawAmountChange = (event) => { setWithdrawAmount(event.target.value) }   
 
     // deposit click
-    const handleDepositClick = () =>{
+    const handleDepositClick = (depositAmount) =>{
         deposit(walletAddress, depositAmount)
         onPlayerScoreChange()
     };
     // withdraw click
-    const handleWithdrawClick = () =>{
+    const handleWithdrawClick = (withdrawAmount) =>{
         withdraw(walletAddress, withdrawAmount, playerScore)
         onPlayerScoreChange()
     };
@@ -50,15 +50,15 @@ function index({}) {
     <div className={styles.main}>
         <div className={styles.title}>LightLink APAC Hackthoon - Chanllenge 1</div>
         <WalletConnect walletAddress={walletAddress}/>
-        <PlayerScore playerScore={playerScore}/>
-        <div>
+        <PlayerScore playerScore={playerScore} onHandleDeposit={handleDepositClick} onHandleWithdraw={handleWithdrawClick}/>
+        {/* <div>
             <input type="number" value={depositAmount} onChange={handleDepositAmountChange}/>
             <button type="button" onClick={handleDepositClick}>deposit</button>
         </div>
         <div>
             <input type="number" value={withdrawAmount} onChange={handleWithdrawAmountChange}/>
             <button type="button" onClick={handleWithdrawClick}>withdraw</button>
-        </div>
+        </div> */}
         <BetArea beginNum={1} endNum={36} lineCnt={3} playerScore={playerScore}
             onBetAction={handleOnBetAction}
             onDwaringAction={handleDrawingClick}

@@ -2,7 +2,10 @@ import React, { useState, useEffect } from 'react'
 import styles from './Layout.module.css'
 
 
-const PlayerScore = ({playerScore}) => {
+const PlayerScore = ({playerScore, onHandleDeposit, onHandleWithdraw}) => {
+    const [isShowChangeAmountInput, setIsShowChangeAmountInput] = useState(false);
+    const [changeType, setChangeType] = useState("");
+    const [changeAmount, setChangeAmount] = useState("");
 
     let playerScoreText = "";
     let uintText = ""
@@ -15,6 +18,42 @@ const PlayerScore = ({playerScore}) => {
         uintText = `wei = ${ethAmount} eth`
     }
 
+    const onHandleDepositClick = () => {
+        setIsShowChangeAmountInput(true)
+        setChangeType("deposit")
+    }
+
+    const onHandleWithdrawClick = () => {
+        setIsShowChangeAmountInput(true)
+        setChangeType("withdraw")
+    }
+
+    const onHandleInput = (event) => {
+        setChangeAmount(event.target.value)
+    }
+
+    const onHandleSubmit = () => {
+        if (changeType === "deposit") {
+            onHandleDeposit(changeAmount)
+        } else if (changeType === "withdraw") {
+            onHandleWithdraw(changeAmount)
+        } else {
+        }
+    }
+
+    const showAmountInput = () => {
+        if (isShowChangeAmountInput) {
+            return (
+                <div style={{display: 'flex'}}>
+                    <div style={{display: 'inline-block', marginLeft: 2}}>Input {changeType} amount: </div>
+                    <input className={styles.changeScoreInput} type="number" onChange={onHandleInput}/>
+                    <button style={{marginLeft: 2}} onClick={onHandleSubmit}>submit</button>
+                </div>
+                
+            )
+        }
+    }
+
     return (
         <div className={styles.scoreBoard}>
             <div className={styles.balance}>Your balance in the contract</div>
@@ -23,16 +62,10 @@ const PlayerScore = ({playerScore}) => {
                 <div className={styles.scoreUint}>{uintText}</div>
             </div>
             <div className={styles.changeScore}>
-                <div>Click </div>
-                <button className={styles.deposit} type="button">deposit</button> 
-                <div>to deposit eth to the contract and increase balance. </div>
+                <button className={styles.deposit} type="button" onClick={onHandleDepositClick}>deposit</button> 
+                <button className={styles.deposit} type="button" onClick={onHandleWithdrawClick}>withdraw</button> 
             </div>
-            <div className={styles.changeScore}>
-                <div>Click </div>
-                <button className={styles.deposit} type="button">withdraw</button> 
-                <div>to withdraw eth from the contract and reduce balance. </div>
-            </div>
-
+            {showAmountInput()}
         </div>
     );    
     

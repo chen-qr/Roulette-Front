@@ -18,10 +18,14 @@
     display: flex;
 }
 
+.changeScoreInput {
+    display: inline-block;
+    width: 150px;
+}
+
 .deposit {
     display: inline-block;
-    margin-left: 2px;
-    margin-right: 2px;
+    margin-right: 5px;
 }
 
 .scoreNumber {
