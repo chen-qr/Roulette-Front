@@ -1,6 +1,5 @@
 import { useState, useEffect, useRef } from 'react'
 import styles from './Layout.module.css'
-import { connect } from 'http2';
 
 const BetAmount = ({}) => {
     const [touchStartX, setTouchStartX] = useState(0)
