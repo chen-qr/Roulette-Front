@@ -39,8 +39,8 @@ function index({}) {
         betAction(walletAddress, selectedNumber, betAmount, playerScore, handleOnBetFinish)
     };
     // drawing click
-    const handleDrawingClick = () =>{
-        drawingAction(walletAddress)
+    const handleDrawingClick = (selectedNumber, betAmount, userRandomNumber, sequenceNumber, handleOnDrawingFinish) =>{
+        drawingAction(walletAddress, selectedNumber, betAmount, userRandomNumber, sequenceNumber, handleOnDrawingFinish)
     };
 
     return (

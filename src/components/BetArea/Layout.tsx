@@ -4,11 +4,22 @@ import BetNumberArea from '../BetNumberArea/Layout'
 import BetAmount from '../BetAmount/Layout'
 
 const BetArea = ({beginNum, endNum, lineCnt, playerScore, onBetAction, onDwaringAction}) => {
-    const [selectedNumber, setSelectedNumber] = useState(0)
     const [currentStep, setCurrentStep] = useState(1)
+    // bet info
+    const [selectedNumber, setSelectedNumber] = useState(0)
     const [betAmount, setBetAmount] = useState(0)
+    const [sequenceNumber, setSequenceNumber] = useState(0)
+    const [userRandomNumber, setUserRandomNumber] = useState(0)
+    const [commitment, setCommitment] = useState(0)
+    const [providerRandom, setProviderRandom] = useState(0)
+    const [finalRandomNumber, setFinalRandomNumber] = useState(0)
+    const [drawNumber, setDrawNumber] = useState(0)
+    const [isWin, setIsWin] = useState(false)
+
     const [betActionTips, setBetActionTips] = useState("Bet")
+    const [drawingActionTips, setDrawingActionTips] = useState("Drawing")
     const [twinkleNumber, setTwinkleNumber] = useState(0)
+    
 
     if ((endNum - beginNum + 1) % lineCnt !== 0){
         throw new Error('endNum - beginNum + 1 must be a multiple of lineCnt');
@@ -27,13 +38,26 @@ const BetArea = ({beginNum, endNum, lineCnt, playerScore, onBetAction, onDwaring
         setBetActionTips("Bet ...")
     }
 
-    const handleOnBetFinish = () => {
+    const handleDrawingClick = (event) => {
+        onDwaringAction(selectedNumber, betAmount, userRandomNumber, sequenceNumber, handleOnDrawingFinish)
+        setDrawingActionTips("Drawing ...")
+    }
+
+    const handleOnBetFinish = (userRandomNumber, commitment, sequenceNumber) => {
+        setUserRandomNumber(userRandomNumber)
+        setCommitment(commitment)
+        setSequenceNumber(sequenceNumber)
+
         setBetActionTips("Bet")
         setCurrentStep(3)
     }
 
-    const handleDrawingClick = (event) => {
-        onDwaringAction()
+    const handleOnDrawingFinish = (providerRandom, finalRandomNumber, drawNumber, isWin) => {
+        setProviderRandom(providerRandom)
+        setFinalRandomNumber(finalRandomNumber)
+        setDrawNumber(drawNumber)
+        setIsWin(isWin)
+        setDrawingActionTips("Drawing")
     }
 
     // 渲染列元素
@@ -86,7 +110,10 @@ const BetArea = ({beginNum, endNum, lineCnt, playerScore, onBetAction, onDwaring
                 {currentStep == 3 ? "👉 Step 3. Please draw the winning number!" : "Step 3. Please draw the winning number!"}
             </div>
 
-            <div className={styles.drawingAction} onClick={handleDrawingClick}>Drawing</div>
+            <div>
+                <div className={styles.drawingAction} onClick={handleDrawingClick}>{drawingActionTips}</div>
+                <div></div>
+            </div>
         </div>
     );    
 }
