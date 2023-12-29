@@ -40,8 +40,8 @@ function index({}) {
         onPlayerScoreChange()
     };
     // bet click
-    const handleOnBetAction = (selectedNumber, betAmount) =>{
-        betAction(walletAddress, selectedNumber, betAmount, playerScore)
+    const handleOnBetAction = (selectedNumber, betAmount, handleOnBetFinish) =>{
+        betAction(walletAddress, selectedNumber, betAmount, playerScore, handleOnBetFinish)
     };
     // drawing click
     const handleDrawingClick = () =>{

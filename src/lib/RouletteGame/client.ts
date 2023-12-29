@@ -51,7 +51,7 @@ export async function withdraw(walletAddress: string, amount: number, playerScor
         .send({from: walletAddress});
 };
 
-export async function betAction(walletAddress: string, betNumber: number, betAmount: number, playerScore: number) {
+export async function betAction(walletAddress: string, betNumber: number, betAmount: number, playerScore: number, handleOnBetFinish) {
 
     if (betNumber <= 0 || betNumber > 12) {
         alert("Bet number must between 1 and 12!");
@@ -82,6 +82,8 @@ export async function betAction(walletAddress: string, betNumber: number, betAmo
     localStorage.betAmount = betAmount;
     localStorage.userRandomNumber = randomNumber;
     localStorage.sequenceNumber = sequenceNumber;
+
+    handleOnBetFinish()
 };
 
 export async function drawingAction(walletAddress: string) {
