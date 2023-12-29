@@ -1,14 +1,16 @@
 
 .percentContain {
+    margin-top: 10px;
+    margin-bottom: 10px;
     position: relative;
     width: 300px;
-    height: 10px;
+    height: 20px;
     background-color: #eee;
     border-radius: 5px;
 }
 .percentProportion {
     width: 0;
-    height: 10px;
+    height: 20px;
     background-color: rgb(93, 233, 64);
     border-radius: 5px;
 }
@@ -17,7 +19,7 @@
     left: 0;
     top: -3px;
     width: 15px;
-    height: 15px;
+    height: 30px;
     background-color: orange;
     border-radius: 50%;
     cursor: pointer;
