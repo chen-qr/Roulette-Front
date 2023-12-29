@@ -36,13 +36,19 @@ const BetAmount = ({}) => {
         setTouchStartX(pageX)
         setTouchStartY(pageY)
 
-        // console.log(document.defaultView.getComputedStyle(box).left)
         setBoxStartX(parseInt(document.defaultView.getComputedStyle(box).left.replace('px', '')))
         setBoxStartY(parseInt(document.defaultView.getComputedStyle(box).top.replace('px', '')))
     };
 
     function handleBoxOnMouseUp(e) {
         setIsMouseDown(false)
+
+        setTouchStartX(0)
+        setTouchStartY(0)
+        setTouchMoveX(0)
+        setTouchMoveY(0)
+        setBoxStartX(0)
+        setBoxStartY(0)
     }
 
     function handleBoxOnMouseMove(e) {
