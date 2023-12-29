@@ -56,7 +56,7 @@ const PlayerScore = ({playerScore, onHandleDeposit, onHandleWithdraw}) => {
 
     return (
         <div className={styles.scoreBoard}>
-            <div className={styles.balance}>Your balance in the contract</div>
+            <div className={styles.balance}>Your balance</div>
             <div className={styles.balanceContent}>
                 <div className={styles.scoreNumber}>{playerScoreText}</div>
                 <div className={styles.scoreUint}>{uintText}</div>
