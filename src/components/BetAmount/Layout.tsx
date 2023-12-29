@@ -9,7 +9,10 @@ const BetAmount = ({}) => {
     const [boxStartX, setBoxStartX] = useState(0)
     const [boxStartY, setBoxStartY] = useState(0)
     const [isMouseDown, setIsMouseDown] = useState(false)
-
+    
+    const [maxLength, setMaxLength] = useState(0)
+    const [leftNum, setLeftNum] = useState(0)
+    const [betRatio, setBetRatio] = useState(0.1)
     const [number, setNumber] = useState(0)
 
     const containRef = useRef<HTMLDivElement>(null);
@@ -46,32 +49,30 @@ const BetAmount = ({}) => {
         const contain = containRef.current;
         const box = boxRef.current;
 
+        setMaxLength(parseInt(contain.style.width.replace('px', '')))
         setTouchMoveX(e.pageX - touchStartX);
         setTouchMoveY(e.pageY - touchStartY);
-        
-        let leftNum = boxStartX + toucMoveX;
+
+        setLeftNum(boxStartX + toucMoveX);
+
         if (leftNum < 0) {
-            leftNum = 0;
+            setLeftNum(0);
         } else if (leftNum > 285) {
-            leftNum = 285;
+            setLeftNum(285);
         }
 
         proportion.style.width = (leftNum + 15) + 'px';
-        // setNumber(proportion.style.width)
-
-        // 计算百分比
-        // let allWidth = $("#wrap").width();
-        let allWidth = parseInt(contain.style.width.replace('px', ''));
+        
         if ((boxStartX + toucMoveX) <= 0) {
             let txt = "0%";
             // setNumber(txt)
         }
         else if( (boxStartX + toucMoveX) >= 285){
-            let txt = (((leftNum + 15) / allWidth) * 100).toFixed(0) + "%";
+            let txt = (((leftNum + 15) / maxLength) * 100).toFixed(0) + "%";
             // setNumber(txt)
         }
         else{
-            let txt = ((leftNum / allWidth) * 100).toFixed(0) + "%";
+            let txt = ((leftNum / maxLength) * 100).toFixed(0) + "%";
             // setNumber(txt)
         }
 
