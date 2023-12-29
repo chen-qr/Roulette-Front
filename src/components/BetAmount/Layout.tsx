@@ -40,7 +40,7 @@ const BetAmount = ({}) => {
         setBoxStartY(parseInt(document.defaultView.getComputedStyle(box).top.replace('px', '')))
     };
 
-    function handleBoxOnMouseUp(e) {
+    function handleBoxOnMouseUpAndLeave(e) {
         setIsMouseDown(false)
 
         setTouchStartX(0)
@@ -111,7 +111,8 @@ const BetAmount = ({}) => {
                 <span ref={boxRef} className={styles.percentBox} 
                     onMouseDown={handleBoxOnMouseDown}
                     onMouseMove={handleBoxOnMouseMove}
-                    onMouseUp={handleBoxOnMouseUp}
+                    onMouseUp={handleBoxOnMouseUpAndLeave}
+                    onMouseLeave={handleBoxOnMouseUpAndLeave}
                 ></span>
             </div>
             <span>{number}</span>
