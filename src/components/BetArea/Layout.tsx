@@ -108,7 +108,7 @@ const BetArea = ({beginNum, endNum, lineCnt, playerScore, onBetAction, onDwaring
 
     return (
         <div className={styles.main}>
-            <div className={styles.gameTitle}>Roulette Game</div>
+            <div className={styles.gameTitle}>Lightlink Roulette</div>
             <div className={`${styles.stepTipsShow} ${getTextColor(1)}`}>
                 {currentStep == 1 ? " 👉 Step 1. Please chose your bet number!" : `Step 1. You have chose bet number!`}
             </div>
