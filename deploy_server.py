@@ -38,7 +38,7 @@ key = paramiko.RSAKey.from_private_key_file("/Users/chenqirong/.ssh/id_rsa", pas
 ssh = paramiko.SSHClient()
 ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
 ssh.connect('207.246.66.68', username='root', pkey=key)
-stdin, stdout, stderr = ssh.exec_command(f"cd remote_dir && rm -rf {' '.join(upload_list)}")
+stdin, stdout, stderr = ssh.exec_command(f"cd {remote_dir} && rm -rf {' '.join(upload_list)}")
 print("已经清空服务器上的文件夹")
 
 start_time = time.time()
