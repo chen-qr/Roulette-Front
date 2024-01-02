@@ -68,5 +68,9 @@ else:
 finally:
     print(stdout)
 
+
+# npm install
+# nohup npm run start &
+
 # 关闭连接
 ssh.close()
