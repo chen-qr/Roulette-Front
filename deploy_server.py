@@ -4,6 +4,11 @@ import os
 import time
 import subprocess
 
+upload_list = [
+    ".next",
+    "package.json"
+]
+
 export_dir = ".product"
 zip_name = "product.zip"
 remote_dir = "/root/lightlink_roulette"
@@ -22,7 +27,7 @@ print(subprocess.getoutput(cp_product_fils))
 
 # 打包文件
 # zip打包默认不包含隐藏文件夹，所以要特意说明打包 .next
-cmd_zip = f"cd {os.path.join(os.getcwd(), export_dir)} && rm -f {zip_name} && zip -r {zip_name} * .next"
+cmd_zip = f"cd {os.path.join(os.getcwd(), export_dir)} && rm -f {zip_name} && zip -r {zip_name} {' '.join(upload_list)}"
 print(subprocess.getoutput(cmd_zip))
 
 local_folder = os.path.join(os.getcwd(), export_dir, zip_name)
@@ -33,7 +38,7 @@ key = paramiko.RSAKey.from_private_key_file("/Users/chenqirong/.ssh/id_rsa", pas
 ssh = paramiko.SSHClient()
 ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
 ssh.connect('207.246.66.68', username='root', pkey=key)
-stdin, stdout, stderr = ssh.exec_command(f"rm -rf {remote_dir}/*")
+stdin, stdout, stderr = ssh.exec_command(f"cd remote_dir && rm -rf {' '.join(upload_list)}")
 print("已经清空服务器上的文件夹")
 
 start_time = time.time()
@@ -60,6 +65,8 @@ except Exception as e:
     print(str(e.args))
 else:
     print("解压成功")
+finally:
+    print(stdout)
 
 # 关闭连接
 ssh.close()
