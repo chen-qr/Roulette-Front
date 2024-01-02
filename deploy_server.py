@@ -74,3 +74,7 @@ finally:
 
 # 关闭连接
 ssh.close()
+
+# 检查 .product 文件夹是否存在，如果存在则删除
+if os.path.exists(export_dir):
+    subprocess.getoutput(f"rm -rf {export_dir}")
