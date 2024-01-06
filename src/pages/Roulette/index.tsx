@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react'
 import styles from './index.module.css'
-import {initWalletAddress} from '../lib/Wallet'
-import {initPlayerScore, deposit, withdraw, betAction, drawingAction} from '../lib/RouletteGame/client'
-import WalletConnect from '../components/WalletConnect/Layout'
-import PlayerScore from '../components/PlayerScore/Layout'
-import BetArea from '../components/BetArea/Layout'
+import {initWalletAddress} from '../../lib/Wallet'
+import {initPlayerScore, deposit, withdraw, betAction, drawingAction} from '../../lib/RouletteGame/client'
+import WalletConnect from '../../components/WalletConnect/Layout'
+import PlayerScore from '../../components/PlayerScore/Layout'
+import BetArea from '../../components/BetArea/Layout'
 
 function index({}) {
     const [walletAddress, setWalletAddress] = useState("")
