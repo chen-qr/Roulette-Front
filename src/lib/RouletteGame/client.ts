@@ -1,3 +1,4 @@
+import { error } from 'console';
 import {contractAddress, abi} from './config'
 import Web3 from "web3";
 
@@ -106,3 +107,30 @@ export async function drawingAction(walletAddress: string,
 
     handleOnDrawingFinish(providerRandom, finalRandomNumber, drawNumber, isWin)
 };
+
+// 从合约事件中获取用户的记录
+export async function getDrawingRecord() {
+    console.log("getDrawingRecord 1");
+
+    const eventName = "DrawingRequest"
+    const option = {
+        filter: {},
+        // fromBlock: "earliest",
+        // toBlock: "latest"
+        fromBlock: 62187002,
+        toBlock: 62187002,
+    }
+    const callback = (error, event) => {
+        if (error) {
+            console.log("cause error");
+            console.error(error);
+        }
+        console.log(event);
+    }
+    const events = await rouletteGame.getPastEvents('allEvents', option, callback)
+    console.log(events);
+
+
+
+    console.log("getDrawingRecord 2");
+}
