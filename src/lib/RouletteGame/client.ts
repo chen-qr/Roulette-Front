@@ -125,9 +125,8 @@ export async function getDrawingRecord() {
             console.log("cause error");
             console.error(error);
         }
-        console.log(event);
     }
-    const events = await rouletteGame.getPastEvents('allEvents', option, callback)
+    const events = await rouletteGame.getPastEvents(eventName, option, callback)
     console.log(events);
 
 
