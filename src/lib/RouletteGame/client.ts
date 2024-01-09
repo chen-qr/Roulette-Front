@@ -109,16 +109,22 @@ export async function drawingAction(walletAddress: string,
 };
 
 // 从合约事件中获取用户的记录
-export async function getDrawingRecord() {
-    console.log("getDrawingRecord 1");
+export async function getDrawingRecord(walletAddress: string) {
+    
+
+    const startBlockId = await rouletteGame.methods.getRecordBlockIdStart().call();
+    const endBlockId = await rouletteGame.methods.getRecordBlockIdEnd().call();
+    const drawCnts = await rouletteGame.methods.getDrawCnt().call();
+
+    console.log(`${startBlockId} ${endBlockId} ${drawCnts}`)
 
     const eventName = "DrawingRequest"
     const option = {
-        filter: {},
-        // fromBlock: "earliest",
-        // toBlock: "latest"
-        fromBlock: 62187002,
-        toBlock: 62187002,
+        filter: {
+            player: walletAddress
+        },
+        fromBlock: endBlockId,
+        toBlock: endBlockId
     }
     const callback = (error, event) => {
         if (error) {
@@ -128,8 +134,4 @@ export async function getDrawingRecord() {
     }
     const events = await rouletteGame.getPastEvents(eventName, option, callback)
     console.log(events);
-
-
-
-    console.log("getDrawingRecord 2");
 }
