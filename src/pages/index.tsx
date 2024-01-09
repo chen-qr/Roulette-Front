@@ -5,6 +5,7 @@ import {initPlayerScore, deposit, withdraw, betAction, drawingAction, getDrawing
 import WalletConnect from '../components/WalletConnect/Layout'
 import PlayerScore from '../components/PlayerScore/Layout'
 import BetArea from '../components/BetArea/Layout'
+import DrawRecord from '../components/DrawRecord/Layout'
 
 function index({}) {
     const [walletAddress, setWalletAddress] = useState("")
@@ -39,10 +40,6 @@ function index({}) {
         onPlayerScoreChange()
     }
 
-    const queryRecord = () => {
-        getDrawingRecord()
-    }
-
     return (
     <div className={styles.main}>
         <div className={styles.title}>LightLink APAC Hackthoon - Chanllenge 1</div>
@@ -53,7 +50,7 @@ function index({}) {
             onDwaringAction={handleDrawingClick}
             handleSaveBetResult={handleSaveBetResult}
             />
-        <button onClick={queryRecord}>查询记录</button>
+        <DrawRecord />
     </div>
     );
 }
