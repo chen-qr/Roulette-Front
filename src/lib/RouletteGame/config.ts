@@ -1,4 +1,4 @@
-export const contractAddress = "0x044Ad7873A3E7f5C527d9ecC58fe7B4D4E4A5A10"
+export const contractAddress = "0xF255faffe424eDBfD5294A76f6C75dB105d00dCf"
 
 export const abi: any = 
 [
@@ -147,6 +147,12 @@ export const abi: any =
       {
         "indexed": false,
         "internalType": "uint256",
+        "name": "previousBlockId",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
         "name": "drawNo",
         "type": "uint256"
       },
@@ -189,6 +195,12 @@ export const abi: any =
       {
         "indexed": false,
         "internalType": "uint256",
+        "name": "drawNumber",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
         "name": "betAmount",
         "type": "uint256"
       },
@@ -196,12 +208,6 @@ export const abi: any =
         "indexed": false,
         "internalType": "uint256",
         "name": "betNumber",
-        "type": "uint256"
-      },
-      {
-        "indexed": false,
-        "internalType": "uint256",
-        "name": "drawNumber",
         "type": "uint256"
       },
       {
@@ -405,20 +411,7 @@ export const abi: any =
   },
   {
     "inputs": [],
-    "name": "getRecordBlockIdEnd",
-    "outputs": [
-      {
-        "internalType": "uint256",
-        "name": "",
-        "type": "uint256"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [],
-    "name": "getRecordBlockIdStart",
+    "name": "getRecordLatestBlockId",
     "outputs": [
       {
         "internalType": "uint256",

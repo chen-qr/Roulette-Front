@@ -112,19 +112,18 @@ export async function drawingAction(walletAddress: string,
 export async function getDrawingRecord(walletAddress: string) {
     
 
-    const startBlockId = await rouletteGame.methods.getRecordBlockIdStart().call();
-    const endBlockId = await rouletteGame.methods.getRecordBlockIdEnd().call();
+    const latestBlockId = await rouletteGame.methods.getRecordLatestBlockId().call();
     const drawCnts = await rouletteGame.methods.getDrawCnt().call();
 
-    console.log(`${startBlockId} ${endBlockId} ${drawCnts}`)
+    console.log(`${latestBlockId}`)
 
     const eventName = "DrawingRequest"
     const option = {
         filter: {
             player: walletAddress
         },
-        fromBlock: endBlockId,
-        toBlock: endBlockId
+        fromBlock: latestBlockId,
+        toBlock: latestBlockId
     }
     const callback = (error, event) => {
         if (error) {
