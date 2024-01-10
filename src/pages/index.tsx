@@ -50,7 +50,6 @@ function index({}) {
 
     return (
     <div className={styles.main}>
-        <div className={styles.title}>LightLink APAC Hackthoon - Chanllenge 1</div>
         <WalletConnect walletAddress={walletAddress}/>
         <PlayerScore playerScore={playerScore} onHandleDeposit={handleDepositClick} onHandleWithdraw={handleWithdrawClick}/>
         <BetArea beginNum={1} endNum={36} lineCnt={3} playerScore={playerScore}
