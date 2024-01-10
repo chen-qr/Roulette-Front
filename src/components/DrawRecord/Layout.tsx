@@ -17,7 +17,6 @@ const DrawRecord = ({walletAddress, canQuery}) => {
     const queryDrawRecord = async () => {
         const batchRecord = await getBatchDrawingRecord(walletAddress, blockId, 10)
         console.log(batchRecord)
-        console.log("啦啦啦")
         setHasQueryBatchRecord(true)
     }
 

@@ -13,10 +13,10 @@ function getContract(walletAddress: string) {
     return rouletteGame;
 }
 
-export async function initPlayerScore(walletAddress: string, setPlayerScore: Function) {
+export async function initPlayerScore(walletAddress: string, handleGetPlayerScore: Function) {
     const rouletteGame = getContract(walletAddress);
     const score = await rouletteGame.methods.getScore().call();
-        setPlayerScore(parseInt(score))
+    handleGetPlayerScore(parseInt(score))
 }
 
 export async function deposit(walletAddress: string, amount: number) {
