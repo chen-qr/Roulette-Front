@@ -109,15 +109,30 @@ export async function drawingAction(walletAddress: string,
 };
 
 // 从合约事件中获取用户的记录
-export async function getDrawingRecord(walletAddress: string, blockId: number) {
-    const latestBlockId = undefined == blockId || blockId <= 0 ? await rouletteGame.methods.getRecordLatestBlockId().call() : blockId;
+export async function getBatchDrawingRecord(walletAddress: string, blockId: number, cnts: number) {
+    let queryBlockId = undefined == blockId || blockId <= 0 ? await rouletteGame.methods.getRecordLatestBlockId().call() : blockId;
+    let queryRecordCnts = 0
+    let batchRecord = []
+
+    while (queryRecordCnts < cnts && queryBlockId >0 ) {
+        const record = await getDrawingRecord(walletAddress, queryBlockId);
+        for (let i = 0; i < record.length && queryRecordCnts <= cnts; i++, queryRecordCnts++) {
+            batchRecord.push(record[i]);
+            queryBlockId = record[i].previousBlockId;
+        }
+    }
+
+    return batchRecord;
+}
+
+async function getDrawingRecord(walletAddress: string, blockId: number) {
     const eventName = "DrawingRequest"
     const option = {
         filter: {
             player: walletAddress
         },
-        fromBlock: latestBlockId,
-        toBlock: latestBlockId
+        fromBlock: blockId,
+        toBlock: blockId
     }
     const callback = (error, event) => {
         if (error) {
@@ -125,5 +140,15 @@ export async function getDrawingRecord(walletAddress: string, blockId: number) {
         }
     }
     const events = await rouletteGame.getPastEvents(eventName, option, callback)
-    console.log(events)
+    return events.map((event) => {
+        return {
+            previousBlockId: event.returnValues.previousBlockId,
+            drawNo: event.returnValues.drawNo,
+            drawTime: event.returnValues.drawTime,
+            betAmount: event.returnValues.betAmount,
+            betNumber: event.returnValues.betNumber,
+            drawNumber: event.returnValues.drawNumber,
+            isWin: event.returnValues.isWin,
+        }
+    })
 }

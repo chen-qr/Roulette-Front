@@ -7,18 +7,21 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 
-import {getDrawingRecord} from '../../lib/RouletteGame/client'
+import {getBatchDrawingRecord} from '../../lib/RouletteGame/client'
 
 const DrawRecord = ({walletAddress, canQuery}) => {
     const [drawRecord, setDrawRecord] = useState([])
+    const [hasQueryBatchRecord, setHasQueryBatchRecord] = useState(false)
     const [blockId, setBlockId] = useState(0)
 
     const queryDrawRecord = async () => {
-        const record = await getDrawingRecord(walletAddress, blockId)
-        console.log(record)
+        const batchRecord = await getBatchDrawingRecord(walletAddress, blockId, 10)
+        console.log(batchRecord)
+        console.log("啦啦啦")
+        setHasQueryBatchRecord(true)
     }
 
-    if (canQuery) {
+    if (canQuery == true && hasQueryBatchRecord == false) {
         queryDrawRecord();
     }
 
