@@ -1,3 +1,4 @@
+// https://extensions-stage.lightlink.io/whitelist-enterprise
 export const contractAddress = "0xF255faffe424eDBfD5294A76f6C75dB105d00dCf"
 
 export const abi: any = 
