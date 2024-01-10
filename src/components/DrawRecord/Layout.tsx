@@ -36,10 +36,10 @@ const DrawRecord = () => {
                         <TableRow>
                             <TableCell>No</TableCell>
                             <TableCell align="right">Time</TableCell>
-                            <TableCell align="right">Result</TableCell>
-                            <TableCell align="right">Bet Number</TableCell>
                             <TableCell align="right">Bet Amount</TableCell>
+                            <TableCell align="right">Bet Number</TableCell>
                             <TableCell align="right">Drawing Number</TableCell>
+                            <TableCell align="right">Result</TableCell>
                         </TableRow>
                     </TableHead>
                     <TableBody>
