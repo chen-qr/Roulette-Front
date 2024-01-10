@@ -9,11 +9,15 @@ import DrawRecord from '../components/DrawRecord/Layout'
 
 function index({}) {
     const [walletAddress, setWalletAddress] = useState("")
-    useEffect(() => { initWalletAddress(setWalletAddress) })
-
     const [playerScore, setPlayerScore] = useState(0)
+    const [canDrawRecordQuery, setCanDrawRecordQuery] = useState(false)
+
+    useEffect(() => { initWalletAddress(setWalletAddress) })
     useEffect(() => { 
-        if (walletAddress != undefined && walletAddress != "") { initPlayerScore(walletAddress, setPlayerScore) }
+        if (walletAddress != undefined && walletAddress != "") { 
+            initPlayerScore(walletAddress, setPlayerScore) 
+            setCanDrawRecordQuery(true) // 余额更新之后，就可以更新开奖记录了
+        }
     }, [walletAddress])
     const onPlayerScoreChange = () => { initPlayerScore(walletAddress, setPlayerScore) }
 
@@ -50,7 +54,7 @@ function index({}) {
             onDwaringAction={handleDrawingClick}
             handleSaveBetResult={handleSaveBetResult}
             />
-        <DrawRecord />
+        <DrawRecord walletAddress={walletAddress} canQuery={canDrawRecordQuery}/>
     </div>
     );
 }
