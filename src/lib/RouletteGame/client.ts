@@ -89,7 +89,7 @@ export async function drawingAction(walletAddress: string,
     }
 
     const fortunaUrl = "https://fortuna-staging.pyth.network";
-    const chainName = "lightlink_pegasus";
+    const chainName = "lightlink-pegasus";
     const url = `${fortunaUrl}/v1/chains/${chainName}/revelations/${sequenceNumber}`;
     const response = await fetch(url, {method: 'get'});
     let res = await response.json();
