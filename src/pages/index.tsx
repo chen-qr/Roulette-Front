@@ -12,6 +12,7 @@ function index({}) {
     const [playerScore, setPlayerScore] = useState(0)
     const [canDrawRecordQuery, setCanDrawRecordQuery] = useState(false)
 
+    // 处理用户金额更新后事件
     const handleGetPlayerScore = (score: number) => {
         setPlayerScore(score)
         setCanDrawRecordQuery(true) // 余额更新之后，就可以更新开奖记录了
@@ -25,13 +26,11 @@ function index({}) {
     }, [walletAddress])
     const onPlayerScoreChange = () => { initPlayerScore(walletAddress, setPlayerScore) }
 
-    // deposit click
-    const handleDepositClick = (depositAmount) =>{
+    const onClickDeposit = (depositAmount) =>{
         deposit(walletAddress, depositAmount)
         onPlayerScoreChange()
     };
-    // withdraw click
-    const handleWithdrawClick = (withdrawAmount) =>{
+    const onClickWithdraw = (withdrawAmount) =>{
         withdraw(walletAddress, withdrawAmount, playerScore)
         onPlayerScoreChange()
     };
@@ -51,7 +50,7 @@ function index({}) {
     return (
     <div className={styles.main}>
         <WalletConnect walletAddress={walletAddress}/>
-        <PlayerScore playerScore={playerScore} onHandleDeposit={handleDepositClick} onHandleWithdraw={handleWithdrawClick}/>
+        <PlayerScore playerScore={playerScore} onHandleDeposit={onClickDeposit} onHandleWithdraw={onClickWithdraw}/>
         <BetArea beginNum={1} endNum={36} lineCnt={3} playerScore={playerScore}
             onBetAction={handleOnBetAction}
             onDwaringAction={handleDrawingClick}
