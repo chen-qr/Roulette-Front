@@ -1,3 +1,4 @@
+// TODO 帮助用户自动选择钱包网络
 export async function initWalletAddress(setWalletAddress: Function) {
     if (window.web3) {
         try {
