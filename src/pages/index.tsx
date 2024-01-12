@@ -13,7 +13,7 @@ function index({}) {
     const [canDrawRecordQuery, setCanDrawRecordQuery] = useState(false)
 
     // 处理用户金额更新后事件
-    const handleGetPlayerScore = (score: number) => {
+    const onContractBackUserScoreRefresh = (score: number) => {
         setPlayerScore(score)
         setCanDrawRecordQuery(true) // 余额更新之后，就可以更新开奖记录了
     }
@@ -21,10 +21,10 @@ function index({}) {
     useEffect(() => { initWalletAddress(setWalletAddress) })
     useEffect(() => { 
         if (walletAddress != undefined && walletAddress != "") { 
-            initPlayerScore(walletAddress, handleGetPlayerScore) 
+            initPlayerScore(walletAddress, onContractBackUserScoreRefresh) 
         }
     }, [walletAddress])
-    const onPlayerScoreChange = () => { initPlayerScore(walletAddress, setPlayerScore) }
+    const onPlayerScoreChange = () => { initPlayerScore(walletAddress, onContractBackUserScoreRefresh) }
 
     const onClickDeposit = (depositAmount) =>{
         deposit(walletAddress, depositAmount)
