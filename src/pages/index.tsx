@@ -34,6 +34,7 @@ function index({}) {
         withdraw(walletAddress, withdrawAmount, playerScore)
         onPlayerScoreChange()
     };
+    
     // bet click
     const handleOnBetAction = (selectedNumber, betAmount, handleOnBetFinish) =>{
         betAction(walletAddress, selectedNumber, betAmount, playerScore, handleOnBetFinish)

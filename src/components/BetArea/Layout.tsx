@@ -3,7 +3,16 @@ import styles from './Layout.module.css'
 import BetNumberArea from '../BetNumberArea/Layout'
 import BetAmount from '../BetAmount/Layout'
 
-const BetArea = ({beginNum, endNum, lineCnt, playerScore, onBetAction, onDwaringAction, handleSaveBetResult}) => {
+const BetArea = ({
+    // beginNum 和 endNum 是展示的数组的开始和结尾，数组是连续的整数
+    beginNum,
+    endNum, 
+    // lineCnt 指每行展示的数量
+    lineCnt, 
+    playerScore, 
+    onBetAction, 
+    onDwaringAction, 
+    handleSaveBetResult}) => {
     const [currentStep, setCurrentStep] = useState(1)
     // bet info
     const [selectedNumber, setSelectedNumber] = useState(0)
