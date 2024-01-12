@@ -34,11 +34,7 @@ function index({}) {
         withdraw(walletAddress, withdrawAmount, playerScore)
         onPlayerScoreChange()
     };
-    
-    // bet click
-    const handleOnBetAction = (selectedNumber, betAmount, handleOnBetFinish) =>{
-        betAction(walletAddress, selectedNumber, betAmount, playerScore, handleOnBetFinish)
-    };
+
     // drawing click
     const handleDrawingClick = (selectedNumber, betAmount, userRandomNumber, sequenceNumber, handleOnDrawingFinish) =>{
         drawingAction(walletAddress, selectedNumber, betAmount, userRandomNumber, sequenceNumber, handleOnDrawingFinish)
@@ -52,9 +48,7 @@ function index({}) {
     <div className={styles.main}>
         <WalletConnect walletAddress={walletAddress}/>
         <PlayerScore playerScore={playerScore} onHandleDeposit={onClickDeposit} onHandleWithdraw={onClickWithdraw}/>
-        <BetArea beginNum={1} endNum={36} lineCnt={3} playerScore={playerScore}
-            onBetAction={handleOnBetAction}
-            onDwaringAction={handleDrawingClick}
+        <BetArea walletAddress={walletAddress} beginNum={1} endNum={36} lineCnt={3} playerScore={playerScore}
             handleSaveBetResult={handleSaveBetResult}
             />
         <DrawRecord walletAddress={walletAddress} canQuery={canDrawRecordQuery}/>

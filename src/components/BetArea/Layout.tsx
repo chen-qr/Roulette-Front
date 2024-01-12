@@ -2,17 +2,19 @@ import { useState } from 'react'
 import styles from './Layout.module.css'
 import BetNumberArea from '../BetNumberArea/Layout'
 import BetAmount from '../BetAmount/Layout'
+import {initPlayerScore, deposit, withdraw, betAction, drawingAction} from '../../lib/RouletteGame/client'
 
 const BetArea = ({
+    // 钱包地址
+    walletAddress,
     // beginNum 和 endNum 是展示的数组的开始和结尾，数组是连续的整数
-    beginNum,
-    endNum, 
+    beginNum, endNum, 
     // lineCnt 指每行展示的数量
     lineCnt, 
+    // 用户的余额，用于校验下注金额
     playerScore, 
-    onBetAction, 
-    onDwaringAction, 
-    handleSaveBetResult}) => {
+    handleSaveBetResult
+}) => {
     const [currentStep, setCurrentStep] = useState(1)
     // bet info
     const [selectedNumber, setSelectedNumber] = useState(0)
@@ -42,17 +44,17 @@ const BetArea = ({
         setCurrentStep(2)
     }
 
-    const handleOnBetClick = (event) => {
-        onBetAction(selectedNumber, betAmount, handleOnBetFinish)
+    const OnClickBetBtn = (event) => {
+        betAction(walletAddress, selectedNumber, betAmount, playerScore, onContractBackBet)
         setBetActionTips("Bet ...")
     }
 
     const handleDrawingClick = (event) => {
-        onDwaringAction(selectedNumber, betAmount, userRandomNumber, sequenceNumber, handleOnDrawingFinish)
+        drawingAction(walletAddress, selectedNumber, betAmount, userRandomNumber, sequenceNumber, onContractBackDrawing)
         setDrawingActionTips("Drawing ...")
     }
 
-    const handleOnBetFinish = (userRandomNumber, commitment, sequenceNumber) => {
+    const onContractBackBet = (userRandomNumber, commitment, sequenceNumber) => {
         setUserRandomNumber(userRandomNumber)
         setCommitment(commitment)
         setSequenceNumber(sequenceNumber)
@@ -61,7 +63,7 @@ const BetArea = ({
         setCurrentStep(3)
     }
 
-    const handleOnDrawingFinish = (providerRandom, finalRandomNumber, drawNumber, isWin) => {
+    const onContractBackDrawing = (providerRandom, finalRandomNumber, drawNumber, isWin) => {
         setProviderRandom(providerRandom)
         setFinalRandomNumber(finalRandomNumber)
         setDrawNumber(drawNumber)
@@ -128,7 +130,7 @@ const BetArea = ({
                 {currentStep == 2 ? "👉 Step 2. Please set your bet amount!" : "Step 2. You have set bet amount!"}
             </div>
             <BetAmount playerScore={playerScore} betAmount={betAmount} setBetAmount={setBetAmount}/>
-            <div className={styles.betAction} onClick={handleOnBetClick}>{betActionTips}</div>
+            <div className={styles.betAction} onClick={OnClickBetBtn}>{betActionTips}</div>
 
             <div className={`${styles.stepTipsShow} ${getTextColor(3)}`}>
                 {currentStep == 3 ? "👉 Step 3. Please draw the winning number!" : "Step 3. Please draw the winning number!"}

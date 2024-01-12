@@ -52,7 +52,7 @@ export async function withdraw(walletAddress: string, amount: number, playerScor
         .send({from: walletAddress});
 };
 
-export async function betAction(walletAddress: string, betNumber: number, betAmount: number, playerScore: number, handleOnBetFinish) {
+export async function betAction(walletAddress: string, betNumber: number, betAmount: number, playerScore: number, onContractBackBet) {
     if (betNumber <= 0 || betNumber > 36) {
         alert("Bet number must between 1 and 36!");
         return;
@@ -78,11 +78,11 @@ export async function betAction(walletAddress: string, betNumber: number, betAmo
     const sequenceNumber = receipt.events.BetRequest.returnValues.sequenceNumber;
     console.log(`   sequence  : ${sequenceNumber}`);
 
-    handleOnBetFinish(userRandomNumber, commitment, sequenceNumber)
+    onContractBackBet(userRandomNumber, commitment, sequenceNumber)
 };
 
 export async function drawingAction(walletAddress: string, 
-    selectedNumber: number, betAmount: number, userRandomNumber: number, sequenceNumber: number, handleOnDrawingFinish) {
+    selectedNumber: number, betAmount: number, userRandomNumber: number, sequenceNumber: number, onContractBackDrawing) {
     if (selectedNumber == 0 || betAmount == 0 || sequenceNumber == 0) {
         alert("You haven't bet yet! Please make a bet!");
         return;
@@ -105,7 +105,7 @@ export async function drawingAction(walletAddress: string,
     const drawNumber = receipt.events.DrawingRequest.returnValues.drawNumber;
     const isWin = receipt.events.DrawingRequest.returnValues.isWin;
 
-    handleOnDrawingFinish(providerRandom, finalRandomNumber, drawNumber, isWin)
+    onContractBackDrawing(providerRandom, finalRandomNumber, drawNumber, isWin)
 };
 
 // 从合约事件中获取用户的记录
